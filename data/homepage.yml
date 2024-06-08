@@ -65,13 +65,13 @@ experience:
     URL: "/reports/IMMUNOMARK_Report.pdf"
 
   items:
-    - title: "Investigaciones Publicadas"
+    - title: "Public proyects"
       company: "Oliver, Javier et al. “Fluorometric Quantification of Total Cell-Free DNA as a Prognostic Biomarker in Non-Small-Cell Lung Cancer Patients Treated with Immune Checkpoint Blockade.” Cancers vol. 15,13 3357. 26 Jun. 2023, doi:10.3390/cancers15133357"
-      duration: "Últimos 2 años"
+      duration: "Last 2 years"
 
-    - title: "Proyectos de Innovación"
-      company: "Colaboración Internacional"
-      duration: "2020 - Presenteeeee"
+    - title: "Innovative proyects"
+      company: "International collaborations"
+      duration: "2020 - Present"
 
 
 # contact
