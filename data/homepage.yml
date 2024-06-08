@@ -1,0 +1,93 @@
+head:
+  title: "IMMUNOMARK: POR UNO MÁS"
+
+# showcase
+showcase:
+  enable: true
+  title: "\n Únete a la lucha contra el cáncer."
+  subtitle: "Apoyemos juntos la investigación en medicina de precisión."
+  description: "IMMUNOMARK es un proyecto dedicado a avanzar en la investigación del cáncer a través de nuevas tecnologías y la inmunoterapia.
+  Cada euro que dones se destinará íntegramente a apoyar esta investigación. Únete a nuestra causa y marca la diferencia.
+  añadir mas añadir masç añadir masç añadir masç añadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masç añadir masçañadir 
+  masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masç añadir masçañadir masçañadir masçañadir masçañadir masç"
+  # image:
+  #   x: "img/showcase/immunomark-uno-mas.jpg"
+  #   _2x: "img/showcase/immunomark-uno-mas.jpg"
+  # imageMobile:
+  #   x: "img/showcase/immunomark-uno-mas.jpg"
+  #   _2x: "img/showcase/immunomark-uno-mas.jpg"
+  content: 
+        <div        id="widget-here-63NW3"        class="widget-here"        data-shortcode="63NW3"        data-lang="es"        data-success_url=""        data-fail_url=""        value="donation-widget"   ></div><link    rel="stylesheet"    href="css/wdplugin-style.css"/><script    src="js/wp_styling.js"    type="text/javascript"></script>
+
+  #button:
+  #  icon: "icon-donation-fill"
+  #  btnText: "Haz una donación"
+  #  URL: "https://immunomark1mas.netlify.app/#contact"
+
+
+  # socialLinks:
+  #   - icon: "linkedin"
+  #     URL: "https://www.linkedin.com/in/immunomark"
+  # 
+  #   - icon: "twitter"
+  #     URL: "https://twitter.com/immunomark"
+
+# about
+about:
+  enable: true
+  title: "¿Quiénes somos?"
+  content: 
+    <p class="lead">
+    <strong>Somos un equipo comprometido con la ciencia y la innovación, dedicado a descubrir nuevas soluciones en la lucha contra el cáncer.</p>
+    <p class="lead">
+    <strong>Nuestro enfoque</strong> es utilizar la integración de datos omicos para avanzar en el campo de la inmunoterapia y ofrecer nuevas esperanzas para tratamientos más efectivos.</p>
+  button:
+    icon: "icon-info-fill"
+    btnText: "Más sobre nosotros"
+    URL: "https://ibima.eu/es/project/cimo-02/"
+
+  image:
+    x: "img/showcase/team.jpg"
+    _2x: "img/showcase/team-2.jpg"
+
+# experience
+experience:
+  enable: true
+  title: "Nuestra Experiencia"
+  description: "Con experiencia en proyectos internacionales y colaboraciones en sectores público y privado, estamos a la vanguardia de la investigación del cáncer."
+  button:
+    icon: "icon-linkedin-fill"
+    btnText: "Conoce nuestro trabajo"
+    URL: "https://www.linkedin.com/in/immunomark"
+  button2:
+    icon: "icon-profile-fill"
+    btnText: "Descarga nuestro informe"
+    URL: "/reports/IMMUNOMARK_Report.pdf"
+
+  items:
+    - title: "Investigaciones Publicadas"
+      company: "Oliver, Javier et al. “Fluorometric Quantification of Total Cell-Free DNA as a Prognostic Biomarker in Non-Small-Cell Lung Cancer Patients Treated with Immune Checkpoint Blockade.” Cancers vol. 15,13 3357. 26 Jun. 2023, doi:10.3390/cancers15133357"
+      duration: "Últimos 2 años"
+
+    - title: "Proyectos de Innovación"
+      company: "Colaboración Internacional"
+      duration: "2020 - Presenteeeee"
+
+
+# contact
+contact:
+  enable: true
+  title: "Contacta con nosotros"
+    
+  image:
+    x: "img/showcase/logo.jpeg"
+    _2x: "img/showcase/logo.jpeg"
+    
+  button:
+    icon: "icon-mail-fill"
+    btnText: "Envíanos un mensaje"
+    btnAction: 'mailto:contacto@immunomark.org'
+    
+  email:
+    title: "Email"
+    email: '<a href="mailto:contacto@immunomark.org">contacto@immunomark.org</a>'

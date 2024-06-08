@@ -1,0 +1,14 @@
+{{ if .Site.Data.homepage.donation.enable }}
+<section class="section rad-animation-group pb-20 pt-20 section--border-bottom" id="donation">
+  <div class="container rad-fade-down">
+    <div class="row d-flex flex-column-reverse flex-md-row">
+      <div class="col-12 col-md-6 my-auto my-auto" stype="margin-left: 70%;">
+        <h2>{{ .Site.Data.homepage.donation.title | safeHTML }}</h2>
+        <p class="lead">
+          {{ .Site.Data.homepage.donation.content | safeHTML }}
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{{ end }}

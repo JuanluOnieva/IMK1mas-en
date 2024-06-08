@@ -1,0 +1,51 @@
+baseURL: /
+languageCode: en-us
+theme: raditian-free-hugo-theme-data-science
+params:
+  footer:
+    copyright: © Juan Luis Onieva. All rights reserved.
+    site_logo:
+      _2x: img/general/business-science-logo.png
+      alt: Design & Code - Business Science
+      x: img/general/business-science-logo.png
+  googleAnalyticsID: ''
+  logo:
+    text1: IMMUNOMARK
+    text2: UNO MÁS
+    img: img/logo3.png
+  plugins:
+    css:
+      - URL: css/main.css
+      - URL: css/rad-icons.css
+      - URL: css/custom.css
+    js:
+      - URL: js/rad-animations.js
+      - URL: js/sticky-header.js
+      - URL: js/library/fontfaceobserver.js
+  sections:
+    - showcase
+    - about
+    - experience
+    - contact
+
+menu:
+  footer:
+    - URL: '#about'
+      name: ¿Quiénes somos?
+      weight: 2
+    - URL: '#experience'
+      name: Nuestra Experiencia
+      weight: 3
+    - URL: '#contact'
+      name: Contacto
+      weight: 4
+  header:
+    - URL: '#about'
+      name: ¿Quiénes somos?
+      weight: 2
+    - URL: '#experience'
+      name: Nuestra Experiencia
+      weight: 3
+    - URL: '#contact'
+      name: Contacto
+      weight: 4
