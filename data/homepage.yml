@@ -4,12 +4,12 @@ head:
 # showcase
 showcase:
   enable: true
-  title: "\n Únete a la lucha contra el cáncer."
-  subtitle: "Apoyemos juntos la investigación en medicina de precisión."
-  description: "IMMUNOMARK es un proyecto dedicado a avanzar en la investigación del cáncer a través de nuevas tecnologías y la inmunoterapia.
-  Cada euro que dones se destinará íntegramente a apoyar esta investigación. Únete a nuestra causa y marca la diferencia.
-  añadir mas añadir masç añadir masç añadir masç añadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masç añadir masçañadir 
-  masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masç añadir masçañadir masçañadir masçañadir masçañadir masç"
+  title: "\n Join the fight against cancer."
+  subtitle: "Let's support precision medicine research together."
+  description: "IMMUNOMARK is a project dedicated to advancing cancer research through new technologies and immunotherapy.
+  Every euro you donate will go entirely to support this research. Join our cause and make a difference.
+  add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more 
+  masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masç"
   # image:
   #   x: "img/showcase/immunomark-uno-mas.jpg"
   #   _2x: "img/showcase/immunomark-uno-mas.jpg"
@@ -17,7 +17,7 @@ showcase:
   #   x: "img/showcase/immunomark-uno-mas.jpg"
   #   _2x: "img/showcase/immunomark-uno-mas.jpg"
   content: 
-        <div        id="widget-here-63NW3"        class="widget-here"        data-shortcode="63NW3"        data-lang="es"        data-success_url=""        data-fail_url=""        value="donation-widget"   ></div><link    rel="stylesheet"    href="css/wdplugin-style.css"/><script    src="js/wp_styling.js"    type="text/javascript"></script>
+        <div        id="widget-here-63NW3"        class="widget-here"        data-shortcode="63NW3"        data-lang="en"        data-success_url=""        data-fail_url=""        value="donation-widget"   ></div><link    rel="stylesheet"    href="css/wdplugin-style.css"/><script    src="js/wp_styling.js"    type="text/javascript"></script>
 
   #button:
   #  icon: "icon-donation-fill"
@@ -35,12 +35,12 @@ showcase:
 # about
 about:
   enable: true
-  title: "¿Quiénes somos?"
+  title: "About us"
   content: 
     <p class="lead">
-    <strong>Somos un equipo comprometido con la ciencia y la innovación, dedicado a descubrir nuevas soluciones en la lucha contra el cáncer.</p>
+    <strong>We are a team committed to science and innovation, dedicated to discovering new solutions in the fight against cancer.</p>
     <p class="lead">
-    <strong>Nuestro enfoque</strong> es utilizar la integración de datos omicos para avanzar en el campo de la inmunoterapia y ofrecer nuevas esperanzas para tratamientos más efectivos.</p>
+    <strong>Our approach</strong> is to use the integration of omics data to advance the field of immunotherapy and offer new hope for more effective treatments.</p>
   button:
     icon: "icon-info-fill"
     btnText: "Más sobre nosotros"
@@ -53,8 +53,8 @@ about:
 # experience
 experience:
   enable: true
-  title: "Nuestra Experiencia"
-  description: "Con experiencia en proyectos internacionales y colaboraciones en sectores público y privado, estamos a la vanguardia de la investigación del cáncer."
+  title: "Our experience"
+  description: "With international project experience and collaborations in the public and private sectors, we are at the forefront of cancer research."
   button:
     icon: "icon-linkedin-fill"
     btnText: "Conoce nuestro trabajo"
@@ -77,7 +77,7 @@ experience:
 # contact
 contact:
   enable: true
-  title: "Contacta con nosotros"
+  title: "Contact"
     
   image:
     x: "img/showcase/logo.jpeg"
@@ -85,7 +85,7 @@ contact:
     
   button:
     icon: "icon-mail-fill"
-    btnText: "Envíanos un mensaje"
+    btnText: "Send a message"
     btnAction: 'mailto:contacto@immunomark.org'
     
   email:

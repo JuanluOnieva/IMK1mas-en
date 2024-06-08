@@ -31,21 +31,27 @@ params:
 menu:
   footer:
     - URL: '#about'
-      name: ¿Quiénes somos?
+      name: About us
       weight: 2
     - URL: '#experience'
-      name: Nuestra Experiencia
+      name: Our experience
       weight: 3
     - URL: '#contact'
-      name: Contacto
+      name: Contact
       weight: 4
+    - URL: 'https://immunomark1mas.netlify.app'
+      name: Español
+      weight: 5
   header:
     - URL: '#about'
-      name: ¿Quiénes somos?
+      name: About us
       weight: 2
     - URL: '#experience'
-      name: Nuestra Experiencia
+      name: Our experience
       weight: 3
     - URL: '#contact'
-      name: Contacto
+      name: Contact
       weight: 4
+    - URL: 'https://immunomark1mas.netlify.app'
+      name: Español
+      weight: 5
