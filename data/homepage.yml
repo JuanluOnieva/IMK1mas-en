@@ -92,19 +92,19 @@ education:
   items:
     - title: "High IGKC-Expressing Intratumoral Plasma Cells Predict Response to Immune Checkpoint Blockade"
       company: "Onieva, Juan Luis et al<br/><br/>"
-      duration: "<a href='https://www.mdpi.com/1422-0067/23/16/9124' style='text-decoration; color=#333'>International journal of molecular sciences</a>"
+      duration: "<a href='https://www.mdpi.com/1422-0067/23/16/9124' target='_blank' style='text-decoration; color=#333'>International journal of molecular sciences</a>"
 
     - title: "Fluorometric Quantification of Total Cell-Free DNA as a Prognostic Biomarker in Non-Small-Cell Lung Cancer Patients Treated with Immune Checkpoint Blockade"
       company: "Oliver, Javier et al<br/><br/>"
-      duration: "<a href='https://www.mdpi.com/2072-6694/15/13/3357' style='text-decoration; color=#333'>Cancers</a>"
+      duration: "<a href='https://www.mdpi.com/2072-6694/15/13/3357' target='_blank' style='text-decoration; color=#333'>Cancers</a>"
 
     - title: "Novel Blood Biomarkers for Response Prediction and Monitoring of Stereotactic Ablative Radiotherapy and Immunotherapy in Metastatic Oligoprogressive Lung Cancer"
       company: "Zafra, Juan et al<br/><br/>"
-      duration: "<a href='https://www.mdpi.com/1422-0067/25/8/4533' style='text-decoration; color=#333'>International journal of molecular sciences</a>"
+      duration: "<a href='https://www.mdpi.com/1422-0067/25/8/4533' target='_blank' style='text-decoration; color=#333'>International journal of molecular sciences</a>"
 
     - title: "Association of Circular RNA and Long Non-Coding RNA Dysregulation with the Clinical Response to Immune Checkpoint Blockade in Cutaneous Metastatic Melanoma."
       company: "Oliver, Javier et al<br/><br/>"
-      duration: "<a href='https://www.mdpi.com/2227-9059/10/10/2419' style='text-decoration; color=#333'>Biomedicines</a>"
+      duration: "<a href='https://www.mdpi.com/2227-9059/10/10/2419' target='_blank' style='text-decoration; color=#333'>Biomedicines</a>"
 
 
 # contact
