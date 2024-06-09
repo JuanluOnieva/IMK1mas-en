@@ -122,7 +122,7 @@ contact:
 
   button:
     icon: "icon-mail-fill"
-    btnText: "Eend us a message"
+    btnText: "Send us a message"
     btnAction: 'mailto:immunomark1mas@mail.com'
   
   button2:
