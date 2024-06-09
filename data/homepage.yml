@@ -6,11 +6,10 @@ showcase:
   enable: true
   title: "\nJoin the fight against cancer"
   subtitle: "One patient, one sequence, one solution"
-  description: "IMMUNOMARK is a project dedicated to advancing cancer research through new technologies and immunotherapy.
-  Every euro you donate will go entirely to support this research. <br/><br/>
-  Since 2019, we have included more than 400 patients in our study. Our goal is to increase this number ONE MORE with each donation. This will allow us to analyse molecular information and decipher the keys to the use of immunotherapy in the fight against cancer.
-  Collaborating in this cause brings research closer to clinical practice and supports the use of precision medicine.
-  And above all, it fosters real hope for patients and their families."
+  description: "At IMMUNOMARK, we're dedicated to pioneering advancements in cancer research through innovative technologies and the power of immunotherapy.
+  Every euro you contribute will go entirely to support this research. <br/><br/>
+  Since our inception in 2019, we've enrolled over 400 patients in our studies. With each donation, our goal is to welcome even more participants. Your support enables us to analyze molecular data, unlocking the potential of immunotherapy in combating cancer. By donating, you help bridge the gap between research and clinical application, promoting the practice of precision medicine.
+  Your contribution doesn't just fund research-it fosters real hope for patients and their families."
   # image:
   #   x: "img/showcase/immunomark-uno-mas.jpg"
   #   _2x: "img/showcase/immunomark-uno-mas.jpg"
@@ -39,7 +38,7 @@ about:
   title: "About us"
   content: 
     We are a team committed to science and innovation, dedicated to discovering new solutions in the fight against cancer. 
-    Our team is made up of highly qualified professionals, including oncologists, laboratory technicians and scientists specialised in bioinformatics and genomics. 
+    Our diverse team includes highly skilled professionals ranging from oncologists to laboratory technicians, as well as scientists specializing in bioinformatics and genomics.
     We are located in the Medical Oncology UGCI of the Regional and Virgen de la Victoria University Hospitals.
     
   content2: 
@@ -83,11 +82,11 @@ experience:
 education:
   enable: true
   title: "IMMUNOMARK"
-  description: "The IMMUNOMARK project focuses on the integration of molecular analyzes to identify predictive biomarkers of response to immunotherapy against lung cancer and metastatic melanoma, using both solid and liquid biopsies. 
-  It covers analysis at the genomic (DNA mutations), transcriptomic (gene expression) and epigenomic (regulation of gene expression) level.
+  description: "The IMMUNOMARK project focuses on the integration of molecular analyses to identify predictive biomarkers of response to immunotherapy against lung cancer and metastatic melanoma.
+  We utilise both solid and liquid biopsies to conduct comprehensive analyses at the genomic, transcriptomic, and epigenomic levels—examining DNA mutations, gene expression, and gene expression regulation, respectively.
   <br/><br/>
-  To date, the project has contributed significantly to the field of precision immunotherapy, developing new tools and methodologies to predict treatment efficacy. Here we present some publications in international magazines.
-  With this fundraising we intend to continue including patients in our study and broaden the scope to include patients with other types of cancer.
+  To date, the project has contributed significantly to the field of precision immunotherapy, developing new tools and methodologies to predict treatment efficacy. Here we present some publications in international scientifc journals.
+  With this fundraising we intend to continue including patients in our study and broaden the scope to include also other types of cancer.
   "
 
   items:
@@ -117,8 +116,8 @@ contact:
     x: "img/showcase/logo.jpeg"
     _2x: "img/showcase/logo.jpeg"
   
-  description: "All fundraising will be managed by the WhyDonate platform. Once completed, the proceeds will be transferred to the Andalusian Public Foundation for Malaga Research in Biomedicine and Health, managing entity of the Malaga Biomedical Research Institute (IBIMA) and Nanomedicine Platform.
-  The donation will be used in the active project of the group belonging to the Intercenter Clinical Management Unit of Medical Oncology of Malaga, specifically the Translational Research in Cancer Immunotherapy group (CIMO-02)."
+  description: "All contributions to our fundraising efforts are managed through the WhyDonate platform, ensuring transparency and security for every donor. Once the fundraising campaign concludes, the proceeds will be directly transferred to the Andalusian Public Foundation for Malaga Research in Biomedicine and Health. This organization is the managing entity of the Malaga Biomedical Research Institute (IBIMA) and the Nanomedicine Platform.
+  Your generous donations will specifically support the active projects of the group Translational Research in Cancer Immunotherapy group (CIMO-02) belonging to the Intercenter Clinical Management Unit of Medical Oncology of Malaga."
 
   button:
     icon: "icon-mail-fill"
