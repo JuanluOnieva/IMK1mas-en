@@ -13,7 +13,7 @@
                       data-src="{{ .Site.Data.homepage.contact.image.x | absURL }}"
                       data-srcset="{{ .Site.Data.homepage.contact.image.x | absURL }} 1x, {{ .Site.Data.homepage.contact.image._2x | absURL }} 1x"
                       alt="Profile Picture"
-                      style="max-width: 90%;"
+                      style="max-width: 90%; max-height:450px!important"
                     />
                   
                
@@ -48,19 +48,28 @@
                     </form>
                 </div>
                 -->
-                
-                <div class="col-12 col-lg-5 contact__info">
+                <div class="col-12 col-sm-12 col-md-8 col-lg-7 col-xl-6 contact__info" style="padding:0px">
+                <p class="lead" style="margin-top:10% !important">
+                    {{ .Site.Data.homepage.contact.description | safeHTML }}
+                </p>
+                <br/>
+                    <a class="btn btn-primary" style="margin-top:1%" href='{{ .Site.Data.homepage.contact.button.btnAction }}'>
+                        <i class="{{ .Site.Data.homepage.contact.button.icon }}"></i>
+                        {{ .Site.Data.homepage.contact.button.btnText }}
+                    </a>
+                    <br/><br/>
+                   <a href="{{ .Site.Data.homepage.contact.button2.btnAction }}" class="btn btn-frameless"
+                   target="_blank" style="margin-top:1%">
+                    <i class="{{ .Site.Data.homepage.contact.button2.icon }}"></i>
+                    {{ .Site.Data.homepage.contact.button2.btnText }}
+                </a>
+                    
                     <h4>{{ .Site.Data.homepage.contact.phone.title }}</h4>
                     <span>{{ .Site.Data.homepage.contact.phone.number }}</span>
                     <h4>{{ .Site.Data.homepage.contact.email.title }}</h4>
                     <span>{{ .Site.Data.homepage.contact.email.email | safeHTML }}</span>
                     <h4>{{ .Site.Data.homepage.contact.address.title }}</h4>
                     <span>{{ .Site.Data.homepage.contact.address.address | safeHTML }}</span>
-                    <br /><br />
-                    <a class="btn btn-primary" href='{{ .Site.Data.homepage.contact.button.btnAction }}'>
-                        <i class="{{ .Site.Data.homepage.contact.button.icon }}"></i>
-                        {{ .Site.Data.homepage.contact.button.btnText }}
-                    </a>
                 </div>
             </div>
         </div>

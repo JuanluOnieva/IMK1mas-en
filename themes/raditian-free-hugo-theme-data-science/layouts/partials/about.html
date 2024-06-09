@@ -1,19 +1,12 @@
 {{ if .Site.Data.homepage.about.enable }}
-<section class="section rad-animation-group pb-20 pt-20 section--border-bottom" id="about">
-  <div class="container rad-fade-down">
-    <div class="row d-flex flex-column-reverse flex-md-row">
-      <div class="about__profile-picture col-12 col-md-6">
-        <img
-          class="lozad img-responsive image-left-overflow"
-          src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
-          data-src="{{ .Site.Data.homepage.about.image.x | absURL }}"
-          data-srcset="{{ .Site.Data.homepage.about.image.x | absURL }} 1x, {{ .Site.Data.homepage.about.image._2x | absURL }} 1x"
-          alt="Profile Picture"
-          style="max-width: 90%; margin-left:5%; margin-top:10%"
-        />
-      </div>
-      <div class="col-12 col-md-6 my-auto my-auto">
-        <h2>{{ .Site.Data.homepage.about.title | safeHTML }}</h2>
+<section class="section section--border-bottom" id="about" style="padding-top: 40px;">
+  <div class="container">
+    <h2 class="rad-animation-group rad-fade-down rad-waiting rad-animate">{{ .Site.Data.homepage.about.title | safeHTML }}</h2>
+
+    <div class="row row--padded rad-animation-group rad-fade-down flex-column-reverse flex-md-row rad-waiting rad-animate" style="animation-delay: 0.1s">
+      
+      <div class="col-12 col-md-6 mt-4 mt-md-0 my-md-auto">
+        <h3>Translational Research in Cancer Immunotherapy</h3>
         <p class="lead">
           {{ .Site.Data.homepage.about.content | safeHTML }}
         </p>
@@ -26,7 +19,48 @@
           {{ .Site.Data.homepage.about.button.btnText }}
         </a>
       </div>
+      <div class="col-12 col-md-6 pl-md-0 text-right">
+        <img
+          class="lozad img-responsive image-right-overflow"
+          src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
+          data-src="{{ .Site.Data.homepage.about.image.x | absURL }}"
+          data-srcset="{{ .Site.Data.homepage.about.image.x | absURL }} 1x, {{ .Site.Data.homepage.about.image._2x | absURL }} 1x"
+          alt="Profile Picture"
+          style="max-width: 100%; margin-top:0%; border-radius: 5%"
+        />
+      </div>
+      
     </div>
+    
+    <div class="row row--padded rad-animation-group rad-fade-down rad-waiting rad-animate" style="animation-delay: 0.1s;">
+      
+      <div class="col-12 col-md-5 pl-md-0 text-left">
+        <img
+          class="lozad img-responsive image-right-overflow"
+          src="data:image/gif;base64,R0lGODlhBwACAIAAAP///wAAACH5BAEAAAEALAAAAAAHAAIAAAIDjI9YADs="
+          data-src="{{ .Site.Data.homepage.about.image2.x | absURL }}"
+          data-srcset="{{ .Site.Data.homepage.about.image._3x | absURL }} 1x, {{ .Site.Data.homepage.about.image._2x | absURL }} 1x"
+          alt="Profile Picture"
+          style="max-width: 100%; margin-left:0%; margin-top:10%; border-radius: 50%"
+        />
+      </div>
+      <div class="col-12 col-md-7 mt-4 mt-md-0 my-md-auto">
+        <h3>Juan Luis Onieva</h3>
+        <p class="lead">
+          {{ .Site.Data.homepage.about.content2 | safeHTML }}
+        </p>
+        <a
+          href="{{ .Site.Data.homepage.about.button2.URL | absURL }}"
+          target="_blank"
+          class="btn btn-primary"
+        >
+          <i class="{{ .Site.Data.homepage.about.button2.icon }}"></i>
+          {{ .Site.Data.homepage.about.button2.btnText }}
+        </a>
+      </div>
+      
+    </div>
+    
   </div>
 </section>
 {{ end }}

@@ -1,15 +1,16 @@
 head:
-  title: "IMMUNOMARK: POR UNO MÁS"
+  title: "IMMUNOMARK: ONE MORE"
 
 # showcase
 showcase:
   enable: true
-  title: "\n Join the fight against cancer."
-  subtitle: "Let's support precision medicine research together."
+  title: "\nJoin the fight against cancer"
+  subtitle: "One patient, one sequence, one solution"
   description: "IMMUNOMARK is a project dedicated to advancing cancer research through new technologies and immunotherapy.
-  Every euro you donate will go entirely to support this research. Join our cause and make a difference.
-  add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more add more 
-  masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masçañadir masç"
+  Every euro you donate will go entirely to support this research. <br/><br/>
+  Since 2019, we have included more than 400 patients in our study. Our goal is to increase this number ONE MORE with each donation. This will allow us to analyse molecular information and decipher the keys to the use of immunotherapy in the fight against cancer.
+  Collaborating in this cause brings research closer to clinical practice and supports the use of precision medicine.
+  And above all, it fosters real hope for patients and their families."
   # image:
   #   x: "img/showcase/immunomark-uno-mas.jpg"
   #   _2x: "img/showcase/immunomark-uno-mas.jpg"
@@ -37,57 +38,98 @@ about:
   enable: true
   title: "About us"
   content: 
-    <p class="lead">
-    <strong>We are a team committed to science and innovation, dedicated to discovering new solutions in the fight against cancer.</p>
-    <p class="lead">
-    <strong>Our approach</strong> is to use the integration of omics data to advance the field of immunotherapy and offer new hope for more effective treatments.</p>
+    We are a team committed to science and innovation, dedicated to discovering new solutions in the fight against cancer. 
+    Our team is made up of highly qualified professionals, including oncologists, laboratory technicians and scientists specialised in bioinformatics and genomics. 
+    We are located in the Medical Oncology UGCI of the Regional and Virgen de la Victoria University Hospitals.
+    
+  content2: 
+    Student of the Doctoral Program in Biomedicine, Translational Research and New Health Technologies at the University of Malaga. His doctoral thesis in bioinformatics aims to use the integration of omics data from different molecular levels to advance the field of immunotherapy and offer new hope for more effective treatments.
+    <br/><br/>
+    Actively involved in <b>IMMUNOMARK UNO MORE</b>, he will participate with RealBuzz in the 2024 Copenhagen Half Marathon to promote this charitable cause.
+
   button:
     icon: "icon-info-fill"
-    btnText: "Más sobre nosotros"
+    btnText: "More about us"
     URL: "https://ibima.eu/es/project/cimo-02/"
+
+  button2:
+    icon: "icon-linkedin-fill"
+    btnText: "Linkedin"
+    URL: "https://es.linkedin.com/in/juanluisonieva"
 
   image:
     x: "img/showcase/team.jpg"
     _2x: "img/showcase/team-2.jpg"
+    _3x: "img/showcase/Photo-2.jpeg"
 
 # experience
 experience:
   enable: true
-  title: "Our experience"
-  description: "With international project experience and collaborations in the public and private sectors, we are at the forefront of cancer research."
+  title: "Solidary race"
+  description: "Our cause <b>IMMUNOMARK: ONE MORE</b> has been selected by RealBuzz as a charity associated with the Copenhagen 2024 Half Marathon. 
+  Dubbed the 'Home of Charity Running', RealBuzz provides resources and support for runners and charities, with the goal of maximizing the impact of donations raised through running activities.
+  <br/><br/>
+  Being represented in this race will allow us to break borders and take our cause to an international level. Furthermore, connecting support for scientific research with the running community leads to greater social impact, uniting
+  science and sport.
+  "
+  
   button:
     icon: "icon-linkedin-fill"
-    btnText: "Conoce nuestro trabajo"
+    btnText: "Get to know our work"
     URL: "https://www.linkedin.com/in/immunomark"
-  button2:
-    icon: "icon-profile-fill"
-    btnText: "Descarga nuestro informe"
-    URL: "/reports/IMMUNOMARK_Report.pdf"
+
+
+# education
+education:
+  enable: true
+  title: "IMMUNOMARK"
+  description: "The IMMUNOMARK project focuses on the integration of molecular analyzes to identify predictive biomarkers of response to immunotherapy against lung cancer and metastatic melanoma, using both solid and liquid biopsies. 
+  It covers analysis at the genomic (DNA mutations), transcriptomic (gene expression) and epigenomic (regulation of gene expression) level.
+  <br/><br/>
+  To date, the project has contributed significantly to the field of precision immunotherapy, developing new tools and methodologies to predict treatment efficacy. Here we present some publications in international magazines.
+  With this fundraising we intend to continue including patients in our study and broaden the scope to include patients with other types of cancer.
+  "
 
   items:
-    - title: "Public proyects"
-      company: "Oliver, Javier et al. “Fluorometric Quantification of Total Cell-Free DNA as a Prognostic Biomarker in Non-Small-Cell Lung Cancer Patients Treated with Immune Checkpoint Blockade.” Cancers vol. 15,13 3357. 26 Jun. 2023, doi:10.3390/cancers15133357"
-      duration: "Last 2 years"
+    - title: "High IGKC-Expressing Intratumoral Plasma Cells Predict Response to Immune Checkpoint Blockade"
+      company: "Onieva, Juan Luis et al<br/><br/>"
+      duration: "<a href='https://www.mdpi.com/1422-0067/23/16/9124' style='text-decoration; color=#333'>International journal of molecular sciences</a>"
 
-    - title: "Innovative proyects"
-      company: "International collaborations"
-      duration: "2020 - Present"
+    - title: "Fluorometric Quantification of Total Cell-Free DNA as a Prognostic Biomarker in Non-Small-Cell Lung Cancer Patients Treated with Immune Checkpoint Blockade"
+      company: "Oliver, Javier et al<br/><br/>"
+      duration: "<a href='https://www.mdpi.com/2072-6694/15/13/3357' style='text-decoration; color=#333'>Cancers</a>"
+
+    - title: "Novel Blood Biomarkers for Response Prediction and Monitoring of Stereotactic Ablative Radiotherapy and Immunotherapy in Metastatic Oligoprogressive Lung Cancer"
+      company: "Zafra, Juan et al<br/><br/>"
+      duration: "<a href='https://www.mdpi.com/1422-0067/25/8/4533' style='text-decoration; color=#333'>International journal of molecular sciences</a>"
+
+    - title: "Association of Circular RNA and Long Non-Coding RNA Dysregulation with the Clinical Response to Immune Checkpoint Blockade in Cutaneous Metastatic Melanoma."
+      company: "Oliver, Javier et al<br/><br/>"
+      duration: "<a href='https://www.mdpi.com/2227-9059/10/10/2419' style='text-decoration; color=#333'>Biomedicines</a>"
 
 
 # contact
 contact:
   enable: true
-  title: "Contact"
+  title: "Charity"
     
   image:
     x: "img/showcase/logo.jpeg"
     _2x: "img/showcase/logo.jpeg"
-    
+  
+  description: "All fundraising will be managed by the WhyDonate platform. Once completed, the proceeds will be transferred to the Andalusian Public Foundation for Malaga Research in Biomedicine and Health, managing entity of the Malaga Biomedical Research Institute (IBIMA) and Nanomedicine Platform.
+  The donation will be used in the active project of the group belonging to the Intercenter Clinical Management Unit of Medical Oncology of Malaga, specifically the Translational Research in Cancer Immunotherapy group (CIMO-02)."
+
   button:
     icon: "icon-mail-fill"
-    btnText: "Send a message"
-    btnAction: 'mailto:contacto@immunomark.org'
+    btnText: "Eend us a message"
+    btnAction: 'mailto:immunomark1mas@mail.com'
+  
+  button2:
+    icon: "glyphicon-cloud"
+    btnText: "Link to WhyDonate"
+    btnAction: 'https://whydonate.com/es/fundraising/prueba-immunomark'
     
   email:
-    title: "Email"
-    email: '<a href="mailto:contacto@immunomark.org">contacto@immunomark.org</a>'
+    title: ""
+    email: #'<a href="mailto:immunomark1mas@mail.com">immunomark1mas@mail.com</a>'

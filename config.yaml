@@ -11,7 +11,7 @@ params:
   googleAnalyticsID: ''
   logo:
     text1: IMMUNOMARK
-    text2: UNO MÁS
+    text2: ONE MORE
     img: img/logo3.png
   plugins:
     css:
@@ -25,6 +25,7 @@ params:
   sections:
     - showcase
     - about
+    - education
     - experience
     - contact
 
@@ -33,25 +34,31 @@ menu:
     - URL: '#about'
       name: About us
       weight: 2
-    - URL: '#experience'
-      name: Our experience
+    - URL: '#education'
+      name: IMMUNOMARK
       weight: 3
-    - URL: '#contact'
-      name: Contact
+    - URL: '#experience'
+      name: Solidarity race
       weight: 4
+    - URL: '#contact'
+      name: Charity
+      weight: 5
     - URL: 'https://immunomark1mas.netlify.app'
       name: Español
-      weight: 5
+      weight: 6
   header:
     - URL: '#about'
       name: About us
       weight: 2
-    - URL: '#experience'
-      name: Our experience
+    - URL: '#education'
+      name: IMMUNOMARK
       weight: 3
-    - URL: '#contact'
-      name: Contact
+    - URL: '#experience'
+      name: Solidarity race
       weight: 4
+    - URL: '#contact'
+      name: Charity
+      weight: 5
     - URL: 'https://immunomark1mas.netlify.app'
       name: Español
-      weight: 5
+      weight: 6

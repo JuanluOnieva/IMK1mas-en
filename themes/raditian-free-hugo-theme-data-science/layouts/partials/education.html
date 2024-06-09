@@ -1,22 +1,21 @@
 {{ if .Site.Data.homepage.education.enable }}
-<section class="section section--border-bottom rad-animation-group">
+<section id="education" class="section section--border-bottom rad-animation-group">
     <div class="container">
-        <div class="row rad-fade-down">
-            <div class="col-12">
-                <h2>{{ .Site.Data.homepage.education.title | safeHTML }}</h2>
-                <div class="row pt-2 pt-md-4">
-                    {{ range .Site.Data.homepage.education.items }}
-                    <div class="col-12 col-sm-6 mb-4 mb-sm-0">
-                        <div class="education">
-                            <div class="education__date">{{ .year | safeHTML }}</div>
-                            <div class="education__title">{{ .university | safeHTML }}</div>
-                            <div class="education__degree">
-                                {{ .degree | safeHTML }}
-                            </div>
-                        </div>
-                    </div>
-                    {{ end }}
+        <div class="row flex-column-reverse flex-md-row rad-fade-down">
+            <div class="col-12 col-sm-6 mt-5 mt-sm-0">
+                {{ range .Site.Data.homepage.education.items }}
+                <div class="education">
+                    <div class="education__date">{{ .duration | safeHTML }}</div>
+                    <div class="education__title">{{ .title | safeHTML }}</div>
+                    <div class="education__company">{{ .company | safeHTML }}</div>
                 </div>
+                {{ end }}
+            </div>
+            <div class="col-12 col-sm-6">
+                <h2>{{ .Site.Data.homepage.education.title | safeHTML }}</h2>
+                <p class="lead">
+                    {{ .Site.Data.homepage.education.description | safeHTML }}
+                </p>
             </div>
         </div>
     </div>
