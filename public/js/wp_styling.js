@@ -848,7 +848,7 @@ currency_symbol_object[id]
 
                     <!-- tipbox -->
                     ${
-tip_enabled?`<div id="tip-box-${id}" class="tip-box" style="height:0px; display: none; font-family: ${font} !important;" data-id="${id}" data-color="${secondaryColorCode}" data-lang="${language_code}"></div>`:''
+tip_enabled?`<div id="tip-box-${id}" class="tip-box" style="height:0px; display: none; font-family: ${font} !important; visibility:hidden" data-id="${id}" data-color="${secondaryColorCode}" data-lang="${language_code}"></div>`:''
 }
 
                     <div class="preview-user-donate-btn-div" id="preview-user-donate-btn-div-${id}" style="display: flex; flex-direction: column; margin-top: 5px">
