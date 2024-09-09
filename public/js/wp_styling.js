@@ -593,12 +593,14 @@ currency_symbol_object[id]
     `;let selected_donation_options='';if(oneTimeCheck!=0){selected_donation_options=donation_options;}else if(oneTimeCheck==0&&monthlyCheck!=0){selected_donation_options=donation_options_monthly;}else if(oneTimeCheck==0&&monthlyCheck==0&&yearlyCheck!=0){selected_donation_options=donation_options_yearly;}
 const donation_window_modal_content=` 
     <!-- Modal content -->
-   <div class="donate-window-content" style="font-family: '${font}' !important; min-width: 200% !important">
+    <div class="donate-window-content" style="font-family: '${font}' !important; min-width: 200% !important">
         <div id="widget-id-${shortcode}" style="display:none;">${id}</div>
         <div id="widget-slug-${id}" style="display:none;">${slug}</div>
         <div id="language-code-${id}" style="display:none;">${language_code}</div>
-        <div class="preview preview_box" id="preview-${id}" style="margin-left: ${
-showDonationFormOnly==1?'5%;':'30%;'
+        <div id="source-${id}" style="display:none;">${source}</div>
+
+        <div class="preview" id="preview-${id}" style="margin-left: ${
+showDonationFormOnly==1?'5px;':'30px;'
 }; ${showDonationFormOnly==1?'z-index:0 !important;':''}">
 
             <div class="preview-card" id="preview-card-${id}" style="box-shadow:${
@@ -624,6 +626,8 @@ showDonationFormOnly!=1?`<span class="close-wp" id="${id}">&times;</span>`:''
 
                <div id = "progress-bar-modal" style="display: ${
 showDonationFormOnly==1?';':'none;'
+}${
+showDonationFormOnly==1&&data['show_donation_details']==false&&data['amount_target']==0?'height:0px !important;':''
 }">
                    <div class="apreview-amount-raised" id="apreview-amount-raised" style="align-items: baseline; height: ${
 showRaisedAmount==0?'0px':'40px'
@@ -632,7 +636,10 @@ showRaisedAmount==0?'0px':'40px'
 data['show_donation_details']==true?data.hasOwnProperty('donation')&&data.hasOwnProperty('amount_target')?`
                    ${
 showRaisedAmount==3?`
-<label for="apreview-collected-amount" style="display: block; font-size: 32px"><span class="currency-symbol">${currency_symbol_object[id]}</span> ${data['donation']['amount']}</label>
+                       <div class="apreview-collected-amount-div" id="apreview-collected-amount-div" style="font-family: '${font}' !important;">
+                           <label for="apreview-collected-amount" style="display: block; font-size: 32px"><span class="currency-symbol">${
+currency_symbol_object[id]
+}</span> ${formatCurrency(data['donation']['amount'],language_code)}</label>
                        </div>
                    `:''
 }
@@ -821,10 +828,10 @@ currency_symbol_object[id]
 
                         `:''
 }
-                        <div class="preview-user-info-div" id="review-user-info-div-${id}" style="margin-top: 0px; margin-bottom: 0px;">
+                        <div class="preview-user-info-div" id="review-user-info-div-${id}" style="mmargin-top: 0px; margin-bottom: 0px;">
                         <div class="preview-user-info-firstname-s" id="preview-user-info-firstname-${id}" style="height:0px !important; margin-top:0px; margin-bottom:0px">
                             <!-- <p>First Name</p> -->
-                            <input type="text" id="firstname-${id}" name="firstName-${id}" placeholder="${_e('First Name',language_code)}" value="Nombre" style="display: none; visibility:hidden; max-height: 0; background-color: white; width: 100%; padding-left:16px !important; height: 0%; font-family: '${font}' !important; font-size: 0px; border-radius: 0px; border: 0px solid !important; margin-top:0px; margin-bottom:0px">
+							<input type="text" id="firstname-${id}" name="firstName-${id}" placeholder="${_e('First Name',language_code)}" value="Nombre" style="display: none; visibility:hidden; max-height: 0; background-color: white; width: 100%; padding-left:16px !important; height: 0%; font-family: '${font}' !important; font-size: 0px; border-radius: 0px; border: 0px solid !important; margin-top:0px; margin-bottom:0px">
                         </div>
                         <label id="show-firstname-error-msg-${id}" style="display: none; font-size: 10px; color: red">${_e('Must be between',language_code)} 1 ${_e('and',language_code)} 30 ${_e('characters',language_code)}.</label>
                         <div class="preview-user-info-lastname-s" id="preview-user-info-lastname-${id}" style="height:0px !important; margin-top:0px; margin-bottom:0px">
@@ -915,7 +922,7 @@ showDonationFormOnly==1?'transparent;':'rgb(0,0,0,0.4);'
             }
         
             .donate-window-content {
-                min-width: 90% !important;
+                min-width: 90%;
                 padding: 0 !important;
             }
         }
@@ -1021,7 +1028,7 @@ var totalAmount=selectedAmount+tipAmount;var tipLabel=document.getElementById('t
 ' '+
 currency_symbol_object[slug]+
 ' '+
-totalAmount;var tipBox=document.getElementById('tip-box-'+slug);let tipMinMaxError=document.getElementById(`show-other-tip-error-msg-${slug}`);tipMinMaxError.style.visibility='hidden';tipMinMaxError.style.display='none';var minimumAllowed=fundraiser_donation_values_response.data.customdonationconfiguration.min_donation_amount;var maximumAllowed=fundraiser_donation_values_response.data.customdonationconfiguration.max_donation_amount;tipMinMaxError.style.visibility='hidden';tipMinMaxError.style.display='none';if(isNaN(totalAmount)||parseFloat(totalAmount)<parseFloat(minimumAllowed)||parseFloat(totalAmount)>parseFloat(maximumAllowed)){tipMinMaxError.style.visibility='visible';tipMinMaxError.style.display='block';}
+formatCurrency(totalAmount,lang);var tipBox=document.getElementById('tip-box-'+slug);let tipMinMaxError=document.getElementById(`show-other-tip-error-msg-${slug}`);tipMinMaxError.style.visibility='hidden';tipMinMaxError.style.display='none';var minimumAllowed=fundraiser_donation_values_response.data.customdonationconfiguration.min_donation_amount;var maximumAllowed=fundraiser_donation_values_response.data.customdonationconfiguration.max_donation_amount;tipMinMaxError.style.visibility='hidden';tipMinMaxError.style.display='none';if(isNaN(totalAmount)||parseFloat(totalAmount)<parseFloat(minimumAllowed)||parseFloat(totalAmount)>parseFloat(maximumAllowed)){tipMinMaxError.style.visibility='visible';tipMinMaxError.style.display='block';}
 if(tipBox.style.display=='none'){tipAmount=0.0;}
 return tipAmount;}
 async function otherTipAmountHandler(slug){var selectedValue=document.getElementById(`select-dropdown-${slug}`).value;let fundraiser_donation_values_response=fundraiser_donation_values_object[slug];if(selectedValue=='Amount'||selectedValue=='Bedrag'||selectedValue=='Menge'||selectedValue=='Cantidat'){var inputTipDiv=document.getElementById('input-tip-div'+slug);inputTipDiv.style.display='flex';var inputTipBox=document.getElementById('input-tip'+slug);inputTipBox.value=fundraiser_donation_values_response.data.tip_amount.default_values.tip_amount_fixed_default;var otherRadio=document.getElementById('select-amount-other-'+slug);var otherRadioText=document.getElementById('select-amount-other-text-'+slug);if(otherRadio&&otherRadio.checked){var otherAmountInputBox=document.getElementById('other-amount-number-'+slug);if(parseInt(otherAmountInputBox.value)>9){inputTipBox.value=(otherAmountInputBox.value*0.1).toFixed(2);inputTipBox.value=(Math.round(inputTipBox.value*100)/100).toFixed(2);}else{inputTipBox.value=(Math.round(inputTipBox.value*100)/100).toFixed(2);}}
