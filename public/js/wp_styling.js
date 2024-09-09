@@ -999,11 +999,11 @@ function removeNonIntegerChars(inputElement){inputElement.value=inputElement.val
 
 function handleTipDropdownNew(id){let options=[];let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let selectedValue=getSelectedValue(id);if(selectedValue>=10){options=[{text:'0% ('+
 formatCurrency((selectedValue*0).toFixed(2),lang)+
-')',value:(selectedValue*0.15).toFixed(2),},{text:'15% ('+
-formatCurrency((selectedValue*0.05).toFixed(2),lang)+
-')',value:(selectedValue*0.05).toFixed(2),},{text:'10% ('+
-formatCurrency((selectedValue*0.1).toFixed(2),lang)+
-')',value:(selectedValue*0.1).toFixed(2),},{text:_e('Other',lang),value:'Amount'},];}else{options=[{text:currency_symbol_object[id]+
+')',value:(selectedValue*0.0).toFixed(2),},{text:'15% ('+
+formatCurrency((selectedValue*0).toFixed(2),lang)+
+')',value:(selectedValue*0.0).toFixed(2),},{text:'10% ('+
+formatCurrency((selectedValue*0).toFixed(2),lang)+
+')',value:(selectedValue*0.0).toFixed(2),},{text:_e('Other',lang),value:'Amount'},];}else{options=[{text:currency_symbol_object[id]+
 ' '+
 formatCurrency(fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.third_option,lang),value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.third_option,},{text:currency_symbol_object[id]+
 ' '+
