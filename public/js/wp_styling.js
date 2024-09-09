@@ -828,32 +828,32 @@ currency_symbol_object[id]
 
                         `:''
 }
-                        <div class="preview-user-info-div" id="review-user-info-div-${id}" style="margin-top: 10px;">
-                        <div class="preview-user-info-firstname-s" id="preview-user-info-firstname-${id}">
+                        <div class="preview-user-info-div" id="review-user-info-div-${id}" style="margin-top: 0px; margin-bottom: 0px;">
+                        <div class="preview-user-info-firstname-s" id="preview-user-info-firstname-${id}" style="height:0px !important; margin-top:0px; margin-bottom:0px">
                             <!-- <p>First Name</p> -->
-                            <input type="text" id="firstname-${id}" name="firstName-${id}" placeholder="${_e('First Name',language_code)}" style="background-color: white; width: 100%; padding-left:16px !important; height: 100%; font-family: '${font}' !important; font-size: 14px; border-radius: 0px; border: 1px solid !important">
+                            <input type="text" id="firstname-${id}" name="firstName-${id}" placeholder="${_e('First Name',language_code)}" value="Nombre" style="display: none; visibility:hidden; max-height: 0; background-color: white; width: 100%; padding-left:16px !important; height: 0%; font-family: '${font}' !important; font-size: 0px; border-radius: 0px; border: 0px solid !important; margin-top:0px; margin-bottom:0px">
                         </div>
                         <label id="show-firstname-error-msg-${id}" style="display: none; font-size: 10px; color: red">${_e('Must be between',language_code)} 1 ${_e('and',language_code)} 30 ${_e('characters',language_code)}.</label>
-                        <div class="preview-user-info-lastname-s" id="preview-user-info-lastname-${id}">
+                        <div class="preview-user-info-lastname-s" id="preview-user-info-lastname-${id}" style="height:0px !important; margin-top:0px; margin-bottom:0px">
                             <!-- <p>Last Name</p> -->
-                            <input type="text" id="lastname-${id}" name="lastName-${id}" placeholder="${_e('Last Name',language_code)}" style="background-color: white; width: 100%; padding-left:16px !important;height: 100%; font-family: '${font}' !important; font-size: 14px; border-radius: 0px; border: 1px solid !important">
+                            <input type="text" id="lastname-${id}" name="lastName-${id}" placeholder="${_e('Last Name',language_code)}" value="Apellidos" style="display: none; visibility:hidden; max-height: 0; background-color: white; width: 100%; padding-left:16px !important;height: 0%; font-family: '${font}' !important; font-size: 0px; border-radius: 0px; border: 0px solid !important; margin-top:0px; margin-bottom:0px">
                         </div>
                         <label id="show-lastname-error-msg-${id}" style="display: none; font-size: 10px; color: red">${_e('Must be between',language_code)} 1 ${_e('and',language_code)} 30 ${_e('characters',language_code)}.</label>
-                        <div class="preview-user-info-email-s" id="preview-user-info-email-${id}">
+                        <div class="preview-user-info-email-s" id="preview-user-info-email-${id}" style="height:0px !important; margin-top:0px; margin-bottom:0px">
                             <!-- <p>Email</p> -->
-                            <input type="text" id="email-${id}" name="email-${id}" placeholder="${_e('Email Address',language_code)}" style="background-color: white; width: 100%; padding-left:16px !important;height: 100%; font-family: '${font}' !important; font-size: 14px; border-radius: 0px; border: 1px solid !important">
+                            <input type="text" id="email-${id}" name="email-${id}" placeholder="${_e('Email Address',language_code)}" value="donacion@email.com" style="display: none; visibility:hidden; max-height: 0; background-color: white; width: 100%; padding-left:16px !important;height: 0%; font-family: '${font}' !important; font-size: 0px; border-radius: 0px; border: 0px solid !important; margin-top:0px; margin-bottom:0px">
                         </div>
                         <label id="show-email-error-msg-${id}" style="display: none; font-size: 10px; color: red">${_e('Please enter a valid email.',language_code)}</label>
                     </div>
 
                     <!-- tipbox -->
                     ${
-tip_enabled?`<div id="tip-box-${id}" class="tip-box" style="display: none; font-family: ${font} !important;" data-id="${id}" data-color="${secondaryColorCode}" data-lang="${language_code}"></div>`:''
+tip_enabled?`<div id="tip-box-${id}" class="tip-box" style="height:0px; display: none; font-family: ${font} !important;" data-id="${id}" data-color="${secondaryColorCode}" data-lang="${language_code}"></div>`:''
 }
 
                     <div class="preview-user-donate-btn-div" id="preview-user-donate-btn-div-${id}" style="display: flex; flex-direction: column; margin-top: 5px">
                     
-                    <div class="checkbox-if-anonymous-s">
+                   <div class="checkbox-if-anonymous-s" style="display:none !important">
                         <div class="checkbox-if-anonymous-s-checkbox" id="checkbox-if-anonymous-s-checkbox">
                             <input type="checkbox" id="is-anonymous-${id}" class="custom-checkbox default-checkbox-visually-hidden">
                             <label for="is-anonymous-${id}" class="custom-checkbox-label"></label>                        
@@ -922,7 +922,7 @@ showDonationFormOnly==1?'transparent;':'rgb(0,0,0,0.4);'
             }
         
             .donate-window-content {
-                min-width: 100%;
+                min-width: 90%;
                 padding: 0 !important;
             }
         }
@@ -958,10 +958,13 @@ if(source=='edit_preivew'){return{donation_box:donation_box,donation_window_moda
 var whydonateSlugs={};var lang='';function showDonateWindow(id,tip_enabled,colorCode,languageCode){document.getElementsByTagName('body')[0].style.overflow='hidden';document.getElementsByTagName('body')[0].style.height='100vh';lang=languageCode.split('_')[0];var modal=document.getElementById('donate-window-modal-'+id);var btn=document.getElementById('apreview-donate-btn-'+id);var span=document.getElementById(''+id);if(modal.style.display=='flex'){modal.style.display='none';}else{modal.style.display='flex';}
 span.onclick=function(){document.getElementsByTagName('body')[0].style.overflow='';document.getElementsByTagName('body')[0].style.height='initial';modal.style.display='none';};window.onclick=function(event){if(event.target==modal){document.getElementsByTagName('body')[0].style.overflow='';document.getElementsByTagName('body')[0].style.height='initial';modal.style.display='none';}};}
 async function loadFont(fontName){var link=document.createElement('link');link.rel='stylesheet';link.href='https://fonts.googleapis.com/css?family='+encodeURIComponent(fontName);document.head.appendChild(link);}
-function createTipboxDropDown(id,color,font){let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let lang=document.getElementById(`language-code-${id}`).innerHTML;var cardDiv=document.getElementById('preview-'+id);cardDiv.style.height='910px';document.getElementById('preview-card-'+id).style.height='845px';var tipBox=document.getElementById('tip-box-'+id);tipBox.className='tip-box';tipBox.style.display='block';tipBox.style.height='auto';tipBox.style.marginTop='15px';tipBox.style.padding='5px';tipBox.style.paddingLeft='10px';tipBox.style.backgroundColor=color+'10';var para1=document.createElement('p');para1.style.fontSize='12px';para1.style.fontWeight='400';para1.style.color='black';para1.textContent=_e('WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.',lang);if(!tipBox.innerHTML){tipBox.appendChild(para1);}
-var selectPercentileDiv=document.createElement('div');selectPercentileDiv.id='whydonate-select-percentile-div'+id;selectPercentileDiv.style.display='flex';selectPercentileDiv.style.justifyContent='space-around';var para2=document.createElement('p');para2.style.fontSize='12px';para2.style.fontWeight='400';para2.style.color='black';para2.style.marginTop='6px';para2.textContent=_e('Thank you for including a tip of',lang)+' ';selectPercentileDiv.appendChild(para2);var selectElement=document.createElement('select');selectElement.classList.add('whydonate-currecy-selected');var selectedValue=getSelectedValue(id);let options;if(selectedValue>=10){options=[{text:'15% ('+
-formatCurrency((selectedValue*0.15).toFixed(2),lang)+
-')',value:(selectedValue*0.15).toFixed(2),},{text:'5% ('+
+
+
+function createTipboxDropDown(id,color,font){let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let lang=document.getElementById(`language-code-${id}`).innerHTML;var cardDiv=document.getElementById('preview-'+id);cardDiv.style.height='910px';document.getElementById('preview-card-'+id).style.height='845px';var tipBox=document.getElementById('tip-box-'+id);tipBox.className='tip-box';tipBox.style.display='block';tipBox.style.height='auto';tipBox.style.marginTop='0px';tipBox.style.padding='0px';tipBox.style.paddingLeft='0px';tipBox.style.backgroundColor=color+'10';var para1=document.createElement('p');para1.style.fontSize='12px';para1.style.fontWeight='400';para1.style.color='black';para1.textContent=_e('WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.',lang);if(!tipBox.innerHTML){tipBox.appendChild(para1);}
+var selectPercentileDiv=document.createElement('div');selectPercentileDiv.id='whydonate-select-percentile-div'+id;selectPercentileDiv.style.display='none';selectPercentileDiv.style.justifyContent='space-around';var para2=document.createElement('p');para2.style.fontSize='12px';para2.style.fontWeight='400';para2.style.color='black';para2.style.marginTop='6px';para2.textContent=_e('Thank you for including a tip of',lang)+' ';selectPercentileDiv.appendChild(para2);var selectElement=document.createElement('select');selectElement.classList.add('whydonate-currecy-selected');var selectedValue=getSelectedValue(id);let options;if(selectedValue>=10)
+{options=[{text:'0% ('+
+formatCurrency((selectedValue*0).toFixed(2),lang)+
+')',value:(selectedValue*0).toFixed(2),},{text:'5% ('+
 formatCurrency((selectedValue*0.05).toFixed(2),lang)+
 ')',value:(selectedValue*0.05).toFixed(2),},{text:'10% ('+
 formatCurrency((selectedValue*0.1).toFixed(2),lang)+
@@ -979,7 +982,7 @@ options.forEach(function(optionData){var option=document.createElement('option')
 id+
 '"'+
 `onkeyup = "calculateTotalAmountDropDown('${id}', 'Amount')"`+
-` value=${fundraiser_donation_values_response.data.tip_amount.default_values.tip_amount_fixed_default}  name="currency" value="1.00" style="width: 110px; height: 25px; border-radius: 3px !important; border-color: transparent !important; font-family: '${font}' !important; font-size: 15px; text-align: right; background: white !important; min-height: auto !important"></div>`+
+` value=${fundraiser_donation_values_response.data.tip_amount.default_values.tip_amount_fixed_default}  name="currency" value="0.00" style="width: 110px; height: 25px; border-radius: 3px !important; border-color: transparent !important; font-family: '${font}' !important; font-size: 15px; text-align: right; background: white !important; min-height: auto !important"></div>`+
 `<label id="show-other-tip-error-msg-${id}" style="font-size: 10px; color: red; visibility: hidden; display:none">${_e('The minimum amount is',lang)} ${
 fundraiser_donation_values_response?.data?.symbol+
 fundraiser_donation_values_response?.data?.customdonationconfiguration?.min_donation_amount
