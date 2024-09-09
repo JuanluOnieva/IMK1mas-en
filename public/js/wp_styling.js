@@ -963,8 +963,8 @@ async function loadFont(fontName){var link=document.createElement('link');link.r
 function createTipboxDropDown(id,color,font){let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let lang=document.getElementById(`language-code-${id}`).innerHTML;var cardDiv=document.getElementById('preview-'+id);cardDiv.style.height='910px';document.getElementById('preview-card-'+id).style.height='845px';var tipBox=document.getElementById('tip-box-'+id);tipBox.className='tip-box';tipBox.style.display='block';tipBox.style.height='auto';tipBox.style.marginTop='0px';tipBox.style.padding='0px';tipBox.style.paddingLeft='0px';tipBox.style.backgroundColor=color+'10';var para1=document.createElement('p');para1.style.fontSize='12px';para1.style.fontWeight='400';para1.style.color='black';para1.textContent=_e('',lang);if(!tipBox.innerHTML){tipBox.appendChild(para1);}
 var selectPercentileDiv=document.createElement('div');selectPercentileDiv.id='whydonate-select-percentile-div'+id;selectPercentileDiv.style.display='none';selectPercentileDiv.style.justifyContent='space-around';var para2=document.createElement('p');para2.style.fontSize='12px';para2.style.fontWeight='400';para2.style.color='black';para2.style.marginTop='6px';para2.textContent=_e('Thank you for including a tip of',lang)+' ';selectPercentileDiv.appendChild(para2);var selectElement=document.createElement('select');selectElement.classList.add('whydonate-currecy-selected');var selectedValue=getSelectedValue(id);let options;if(selectedValue>=10)
 {options=[{text:'0% ('+
-formatCurrency((selectedValue*0).toFixed(2),lang)+
-')',value:(selectedValue*0).toFixed(2),},{text:'5% ('+
+formatCurrency((selectedValue*0.0).toFixed(2),lang)+
+')',value:(selectedValue*0.0).toFixed(2),},{text:'5% ('+
 formatCurrency((selectedValue*0.0).toFixed(2),lang)+
 ')',value:(selectedValue*0.0).toFixed(2),},{text:'10% ('+
 formatCurrency((selectedValue*0.0).toFixed(2),lang)+
@@ -998,9 +998,9 @@ function removeNonIntegerChars(inputElement){inputElement.value=inputElement.val
 
 
 function handleTipDropdownNew(id){let options=[];let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let selectedValue=getSelectedValue(id);if(selectedValue>=10){options=[{text:'0% ('+
-formatCurrency((selectedValue*0).toFixed(2),lang)+
+formatCurrency((selectedValue*0.0).toFixed(2),lang)+
 ')',value:(selectedValue*0.0).toFixed(2),},{text:'15% ('+
-formatCurrency((selectedValue*0).toFixed(2),lang)+
+formatCurrency((selectedValue*0.0).toFixed(2),lang)+
 ')',value:(selectedValue*0.0).toFixed(2),},{text:'10% ('+
 formatCurrency((selectedValue*0).toFixed(2),lang)+
 ')',value:(selectedValue*0.0).toFixed(2),},{text:_e('Other',lang),value:'Amount'},];}else{options=[{text:currency_symbol_object[id]+
