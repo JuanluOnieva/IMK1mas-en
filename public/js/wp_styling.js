@@ -593,14 +593,14 @@ currency_symbol_object[id]
     `;let selected_donation_options='';if(oneTimeCheck!=0){selected_donation_options=donation_options;}else if(oneTimeCheck==0&&monthlyCheck!=0){selected_donation_options=donation_options_monthly;}else if(oneTimeCheck==0&&monthlyCheck==0&&yearlyCheck!=0){selected_donation_options=donation_options_yearly;}
 const donation_window_modal_content=` 
     <!-- Modal content -->
-    <div class="donate-window-content" style="font-family: '${font}' !important; min-width: 200% !important">
+    <div class="donate-window-content" style="font-family: '${font}' !important;">
         <div id="widget-id-${shortcode}" style="display:none;">${id}</div>
         <div id="widget-slug-${id}" style="display:none;">${slug}</div>
         <div id="language-code-${id}" style="display:none;">${language_code}</div>
         <div id="source-${id}" style="display:none;">${source}</div>
 
         <div class="preview" id="preview-${id}" style="margin-left: ${
-showDonationFormOnly==1?'5px;':'30px;'
+showDonationFormOnly==1?'0px;':'30px;'
 }; ${showDonationFormOnly==1?'z-index:0 !important;':''}">
 
             <div class="preview-card" id="preview-card-${id}" style="box-shadow:${
@@ -828,32 +828,32 @@ currency_symbol_object[id]
 
                         `:''
 }
-                        <div class="preview-user-info-div" id="review-user-info-div-${id}" style="mmargin-top: 0px; margin-bottom: 0px;">
-                        <div class="preview-user-info-firstname-s" id="preview-user-info-firstname-${id}" style="height:0px !important; margin-top:0px; margin-bottom:0px">
+                        <div class="preview-user-info-div" id="review-user-info-div-${id}" style="margin-top: 10px;">
+                        <div class="preview-user-info-firstname-s" id="preview-user-info-firstname-${id}">
                             <!-- <p>First Name</p> -->
-							<input type="text" id="firstname-${id}" name="firstName-${id}" placeholder="${_e('First Name',language_code)}" value="Nombre" style="display: none; visibility:hidden; max-height: 0; background-color: white; width: 100%; padding-left:16px !important; height: 0%; font-family: '${font}' !important; font-size: 0px; border-radius: 0px; border: 0px solid !important; margin-top:0px; margin-bottom:0px">
+                            <input type="text" id="firstname-${id}" name="firstName-${id}" placeholder="${_e('First Name',language_code)}" style="background-color: white; width: 100%; padding-left:16px !important; height: 100%; font-family: '${font}' !important; font-size: 14px; border-radius: 0px; border: 1px solid !important">
                         </div>
                         <label id="show-firstname-error-msg-${id}" style="display: none; font-size: 10px; color: red">${_e('Must be between',language_code)} 1 ${_e('and',language_code)} 30 ${_e('characters',language_code)}.</label>
-                        <div class="preview-user-info-lastname-s" id="preview-user-info-lastname-${id}" style="height:0px !important; margin-top:0px; margin-bottom:0px">
+                        <div class="preview-user-info-lastname-s" id="preview-user-info-lastname-${id}">
                             <!-- <p>Last Name</p> -->
-                            <input type="text" id="lastname-${id}" name="lastName-${id}" placeholder="${_e('Last Name',language_code)}" value="Apellidos" style="display: none; visibility:hidden; max-height: 0; background-color: white; width: 100%; padding-left:16px !important;height: 0%; font-family: '${font}' !important; font-size: 0px; border-radius: 0px; border: 0px solid !important; margin-top:0px; margin-bottom:0px">
+                            <input type="text" id="lastname-${id}" name="lastName-${id}" placeholder="${_e('Last Name',language_code)}" style="background-color: white; width: 100%; padding-left:16px !important;height: 100%; font-family: '${font}' !important; font-size: 14px; border-radius: 0px; border: 1px solid !important">
                         </div>
                         <label id="show-lastname-error-msg-${id}" style="display: none; font-size: 10px; color: red">${_e('Must be between',language_code)} 1 ${_e('and',language_code)} 30 ${_e('characters',language_code)}.</label>
-                        <div class="preview-user-info-email-s" id="preview-user-info-email-${id}" style="height:0px !important; margin-top:0px; margin-bottom:0px">
+                        <div class="preview-user-info-email-s" id="preview-user-info-email-${id}">
                             <!-- <p>Email</p> -->
-                            <input type="text" id="email-${id}" name="email-${id}" placeholder="${_e('Email Address',language_code)}" value="donacion@email.com" style="display: none; visibility:hidden; max-height: 0; background-color: white; width: 100%; padding-left:16px !important;height: 0%; font-family: '${font}' !important; font-size: 0px; border-radius: 0px; border: 0px solid !important; margin-top:0px; margin-bottom:0px">
+                            <input type="text" id="email-${id}" name="email-${id}" placeholder="${_e('Email Address',language_code)}" style="background-color: white; width: 100%; padding-left:16px !important;height: 100%; font-family: '${font}' !important; font-size: 14px; border-radius: 0px; border: 1px solid !important">
                         </div>
                         <label id="show-email-error-msg-${id}" style="display: none; font-size: 10px; color: red">${_e('Please enter a valid email.',language_code)}</label>
                     </div>
 
                     <!-- tipbox -->
                     ${
-tip_enabled?`<div id="tip-box-${id}" class="tip-box" style="height:0px; display: none; font-family: ${font} !important;" data-id="${id}" data-color="${secondaryColorCode}" data-lang="${language_code}"></div>`:''
+tip_enabled?`<div id="tip-box-${id}" class="tip-box" style="display: none; font-family: ${font} !important;" data-id="${id}" data-color="${secondaryColorCode}" data-lang="${language_code}"></div>`:''
 }
 
                     <div class="preview-user-donate-btn-div" id="preview-user-donate-btn-div-${id}" style="display: flex; flex-direction: column; margin-top: 5px">
                     
-                    <div class="checkbox-if-anonymous-s" style="display:none !important">
+                    <div class="checkbox-if-anonymous-s">
                         <div class="checkbox-if-anonymous-s-checkbox" id="checkbox-if-anonymous-s-checkbox">
                             <input type="checkbox" id="is-anonymous-${id}" class="custom-checkbox default-checkbox-visually-hidden">
                             <label for="is-anonymous-${id}" class="custom-checkbox-label"></label>                        
@@ -922,7 +922,7 @@ showDonationFormOnly==1?'transparent;':'rgb(0,0,0,0.4);'
             }
         
             .donate-window-content {
-                min-width: 90%;
+                min-width: 100%;
                 padding: 0 !important;
             }
         }
@@ -988,12 +988,15 @@ fundraiser_donation_values_response?.data?.symbol+
 fundraiser_donation_values_response?.data?.customdonationconfiguration.max_donation_amount
 } </label>`;inputTipDiv.appendChild(inputTipSpan);var selectPercentileDivElement=document.getElementById('whydonate-select-percentile-div'+id);if(!selectPercentileDivElement){tipBox.appendChild(selectPercentileDiv);}
 var inputTipDivElement=document.getElementById('input-tip-div'+id);if(!inputTipDivElement){tipBox.appendChild(inputTipDiv);}
-var totalChargeDiv=document.createElement('div');totalChargeDiv.id='whydonate-total-charge-div'+id;totalChargeDiv.style.height='20px';totalChargeDiv.style.marginTop='10px';totalChargeDiv.style.textAlign='right';var totalChargeLabel=document.createElement('label');totalChargeLabel.id='total-charge-label'+id;totalChargeLabel.style.fontFamily=font;totalChargeLabel.style.fontSize='15px';totalChargeLabel.innerHTML=_e('Total Charge:',lang)+' '+currency_symbol_object[id]+' ';totalChargeLabel.style.color='black';totalChargeLabel.style.fontWeight='600';totalChargeLabel.style.width='100%';var totalChargeDivElement=document.getElementById('whydonate-total-charge-div'+id);if(!totalChargeDivElement){totalChargeDiv.appendChild(totalChargeLabel);tipBox.appendChild(totalChargeDiv);}
+var totalChargeDiv=document.createElement('div');totalChargeDiv.id='whydonate-total-charge-div'+id;totalChargeDiv.style.height='0px';totalChargeDiv.style.marginTop='none';totalChargeDiv.style.marginTop='0px';var totalChargeLabel=document.createElement('label');totalChargeLabel.id='total-charge-label'+id;totalChargeLabel.style.fontFamily=font;totalChargeLabel.style.fontSize='15px';totalChargeLabel.innerHTML=_e('Total Charge:',lang)+' '+currency_symbol_object[id]+' ';totalChargeLabel.style.color='black';totalChargeLabel.style.fontWeight='600';totalChargeLabel.style.width='100%';var totalChargeDivElement=document.getElementById('whydonate-total-charge-div'+id);if(!totalChargeDivElement){totalChargeDiv.appendChild(totalChargeLabel);tipBox.appendChild(totalChargeDiv);}
+
 let dropDownValue=document.getElementById(`select-dropdown-${id}`).value;calculateTotalAmountDropDown(id,dropDownValue);document.getElementById(`input-tip${id}`).oninput=function(){removeNonIntegerChars(this);};}
 function removeNonIntegerChars(inputElement){inputElement.value=inputElement.value.replace(/\D/g,'');}
-function handleTipDropdownNew(id){let options=[];let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let selectedValue=getSelectedValue(id);if(selectedValue>=10){options=[{text:'15% ('+
-formatCurrency((selectedValue*0.15).toFixed(2),lang)+
-')',value:(selectedValue*0.15).toFixed(2),},{text:'5% ('+
+
+
+function handleTipDropdownNew(id){let options=[];let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let selectedValue=getSelectedValue(id);if(selectedValue>=10){options=[{text:'0% ('+
+formatCurrency((selectedValue*0).toFixed(2),lang)+
+')',value:(selectedValue*0.15).toFixed(2),},{text:'15% ('+
 formatCurrency((selectedValue*0.05).toFixed(2),lang)+
 ')',value:(selectedValue*0.05).toFixed(2),},{text:'10% ('+
 formatCurrency((selectedValue*0.1).toFixed(2),lang)+
@@ -1004,6 +1007,9 @@ formatCurrency(fundraiser_donation_values_response.data.tip_amount.tip_amount_fi
 formatCurrency(fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.first_option,lang),value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.first_option,},{text:currency_symbol_object[id]+
 ' '+
 formatCurrency(fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.second_option,lang),value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.second_option,},{text:_e('Other',lang),value:'Amount'},];}
+
+
+
 let dropDownValue=document.getElementById(`select-dropdown-${id}`).value;var selectElement=document.getElementById(`select-dropdown-${id}`);selectElement.innerHTML='';options.forEach(function(option){var optionElement=document.createElement('option');optionElement.text=option.text;optionElement.value=option.value;selectElement.appendChild(optionElement);});let otherRadio=document.getElementById('select-amount-other-'+id);let openRadio=document.getElementById('select-open-amount-'+id);let inputTipDivEle=document.getElementById(`input-tip-div${id}`);if(otherRadio&&otherRadio.checked&&dropDownValue=='Amount'){for(var i=0;i<selectElement.options.length;i++){if(selectElement.options[i].value==='Amount'){selectElement.options[i].selected=true;break;}}}else if(openRadio&&openRadio.checked&&dropDownValue=='Amount'){for(var i=0;i<selectElement.options.length;i++){if(selectElement.options[i].value==='Amount'){selectElement.options[i].selected=true;break;}}}else{inputTipDivEle.style.display='none';}
 var tip_box_input=document.getElementById(`input-tip${id}`);tip_box_input.value=fundraiser_donation_values_response.data.tip_amount.default_values.tip_amount_fixed_default;if(dropDownValue=='Amount'&&selectedValue>=10){calculateTotalAmountDropDown(id,selectedValue*0.15);}else if(dropDownValue=='Amount'&&selectedValue<10){calculateTotalAmountDropDown(id,fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.third_option);}else{calculateTotalAmountDropDown(id,dropDownValue);}}
 function handleTipDropdownOnChange(id,value){let inputTipDivEle=document.getElementById(`input-tip-div${id}`);if(value!='Amount'){inputTipDivEle.style.display='none';}
