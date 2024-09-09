@@ -922,7 +922,7 @@ showDonationFormOnly==1?'transparent;':'rgb(0,0,0,0.4);'
             }
         
             .donate-window-content {
-                min-width: 90%;
+                min-width: 100% !important;
                 padding: 0 !important;
             }
         }
