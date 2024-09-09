@@ -19,7 +19,7 @@ showcase:
   #   x: "img/showcase/immunomark-uno-mas.jpg"
   #   _2x: "img/showcase/immunomark-uno-mas.jpg"
   content: 
-        <div        id="widget-here-63NW3"        class="widget-here"        data-shortcode="63NW3"        data-lang="en"        data-success_url=""        data-fail_url=""        value="donation-widget"   ></div><link    rel="stylesheet"    href="css/wdplugin-style.css"/><script    src="js/wp_styling.js"    type="text/javascript"></script>
+        <div        id="widget-here-UduhD"        class="widget-here"        data-shortcode="UduhD"        data-lang="en"        data-success_url=""        data-fail_url="https://whydonate.com/en/fundraising/immunomark-uno-mas"        value="donation-widget"   ></div><link    rel="stylesheet"    href="css/wdplugin-style.css"/><script    src="js/wp_styling.js"    type="text/javascript"></script>
 
   #button:
   #  icon: "icon-donation-fill"
