@@ -20,85 +20,85 @@ async function makeDonation(data,successUrl,failureUrl,donorInfo){const donation
 async function getDonorStatus(orderId,success_url,fail_url){var api=`${wdplugin_donation_worker_url}/donation/order/status/?order_id=${orderId}`;var url=api;await fetch(url,{method:'get',}).then(function(response){return response.json();}).then(function(result){if(success_url!=''&&!success_url.startsWith('http')){success_url='https://'+success_url;}
 if(fail_url!=''&&!fail_url.startsWith('http')){fail_url='https://'+fail_url;}
 if(result.data.status=='paid'){window.location.href=success_url;}else if(result.data.status=='canceled'||result.data.status=='open'||result.data.status=='unpaid'){window.location.href=fail_url;}else{}});}
+async function updateDonorInformation(donorInfo,urlToRedirect,donorId,orderId){var api=`${wdplugin_donation_worker_url}/donation/donor/update/`;var url=api;let body={firstname:donorInfo.firstname,lastname:donorInfo.lastname,is_anonymous:donorInfo.is_anonymous,language_code:donorInfo.language_code,name:donorInfo.firstname+' '+donorInfo.lastname,id:donorId,o_id:orderId,email:donorInfo.email,};await fetch(url,{method:'put',headers:{'Content-Type':'application/json','Access-Control-Allow-Headers':'*','Access-Control-Allow-Methods':'*','Access-Control-Allow-Origin':'*',},body:JSON.stringify(body),}).then(function(response){return response.json();}).then(function(result){localStorage.setItem('donor_info',{});setTimeout(function(){if(urlToRedirect&&urlToRedirect!=''){window.location.assign(urlToRedirect);}},3000);});}
 async function checkInstallations(payload){let apiUrl=`${wdplugin_account_worker_url}/account/check/installations`;const settings={method:'post',headers:{'Content-Type':'application/json',},body:JSON.stringify(payload),};const res=await fetch(apiUrl,settings);if(res.ok){const json=await res.json();}else{console.log('Track installations error: '+response.status);}}
 function addslashes(str){return str.replace(/\\/g,'\\\\').replace(/'/g,"\\'").replace(/"/g,'\\"').replace(/\0/g,'\\0');}
-function _e(text,lang){const translations={en:{of:'of','One Time':'One Time',Monthly:'Monthly',Yearly:'Yearly','Select Amount':'Select Amount',Anonymous:'Anonymous',Donate:'Donate','Powered by ':'Powered by ',funded:'funded ',Other:'Other ',Amount:'Amount','Total Charge:':'Total Charge:','Whydonate has a 0% platform fee for organizers and relies on the generosity of donors like you to operate our service.':'Whydonate has a 0% platform fee for organizers and relies on the generosity of donors like you to operate our service.','Thank you for including a tip of':'Thank you for including a tip of','Enter Amount':'Enter Amount','First Name':'First Name','Last Name':'Last Name','Email Address':'Email Address',Currency:'Currency','The minimum amount is':'The minimum amount is','The maximum amount is':'The maximum amount is','Must be between':'Must be between',and:'and',characters:'characters','Please enter a valid email.':'Please enter a valid email.','Fundraiser is either closed by time or owner closed it!':'Fundraiser is either closed by time or owner closed it.','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.',closed:'closed',},bg:{of:'на','One Time':'Един Път',Monthly:'Месечно',Yearly:'Годишно','Select Amount':'Изберете Сума',Anonymous:'Анонимен',Donate:'Дарение','Powered by':'Задвижвани от',funded:'финансиран',Other:'Други',Amount:'Сума','Total Charge:':'Общи Разходи:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate има 0% такса за платформата за организаторите и се разчита на щедростта на дарителите като вас, за да функционира нашата услуга.','Thank you for including a tip of':'Благодаря за включването на дарение от:','Enter Amount':'Въведете Сума','First Name':'First Name','Last Name':'Фамилия','Email Address':'Имейл Адрес',Currency:'Валута','The minimum amount is':'Минималната сума е','The maximum amount is':'Максималната сума е','Must be between':'Трябва да е между',and:'и',characters:'символи','Please enter a valid email.':'Въведете валиден имейл адрес.','Fundraiser is either closed by time or owner closed it!':'Фондосъбирателят е или затворен поради изтичане на времето, или е затворен от собственика!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Изберете валутата, в която искате да направите дарение Ако тя се различава от валутата по подразбиране, сумата ще бъде автоматично обменена.',closed:'затворено',},de:{of:'von','One Time':'Einmalig',Monthly:'Monatlich',Yearly:'Jährlich','Select Amount':'Betrag auswählen',Anonymous:'Anonym',Donate:'Spenden','Powered by':'Betrieben von',funded:'finanziert',Other:'Andere',Amount:'Betrag','Total Charge:':'Gesamtbetrag:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate hat eine Plattformgebühr von 0 % für Organisatoren und ist auf die Großzügigkeit von Spendern wie Ihnen angewiesen, um unseren Service zu betreiben.','Thank you for including a tip of':'Vielen Dank, dass Sie einen Tipp mit aufgenommen haben:','Enter Amount':'Menge Eingeben','First Name':'Vorname','Last Name':'Nachname','Email Address':'E-Mail-Adresse',Currency:'Währung','The minimum amount is':'Der Mindestbetrag beträgt','The maximum amount is':'Der Höchstbetrag beträgt','Must be between':'Muss zwischen',and:'und',characters:'zeichen','Please enter a valid email.':'Bitte geben Sie eine gültige E-Mail-Adresse ein.','Fundraiser is either closed by time or owner closed it!':'Die Spendenaktion ist entweder abgelaufen oder wurde vom Besitzer geschlossen!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Wählen Sie die Währung aus, in der Sie spenden möchten. Wenn sie sich von der Standardwährung unterscheidet, wird der Betrag automatisch umgerechnet.',closed:'geschlossen',},el:{of:'του','One Time':'Μια Φορά',Monthly:'Μηνιαίο',Yearly:'Ετήσιο','Select Amount':'Επιλέξτε Ποσό',Anonymous:'Ανώνυμος',Donate:'Δωρεά','Powered by':'Τροφοδοτείται από',funded:'χρηματοδοτημένο',Other:'Άλλο',Amount:'Ποσό','Total Charge:':'Συνολικό Κόστος:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'Το WhyDonate έχει 0% χρέωση πλατφόρμας για τους διοργανωτές και βασίζεται στη γενναιοδωρία χορηγών όπως εσείς για να λειτουργήσει την υπηρεσία μας.','Thank you for including a tip of':'Σας ευχαριστούμε που περιλάβατε ένα φιλοδώρημα των:','Enter Amount':'Εισάγετε Ποσό','First Name':'Όνομα','Last Name':'Επώνυμο','Email Address':'Διεύθυνση Ηλεκτρονικού Ταχυδρομείου',Currency:'Νόμισμα','The minimum amount is':'Το ελάχιστο ποσό είναι','The maximum amount is':'Το μέγιστο ποσό είναι','Must be between':'Πρέπει να είναι μεταξύ',and:'και',characters:'χαρακτήρες','Please enter a valid email.':'Παρακαλώ εισάγετε μια έγκυρη διεύθυνση email.','Fundraiser is either closed by time or owner closed it!':'Ο έρανος είτε έκλεισε με τον καιρό είτε τον έκλεισε ο ιδιοκτήτης!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Επιλέξτε το νόμισμα στο οποίο θέλετε να κάνετε τη δωρεά Εάν διαφέρει από το προεπιλεγμένο νόμισμα, το ποσό θα ανταλλαχθεί αυτόματα.',closed:'κλειστό',},nl:{of:'van','One Time':'Eenmalig',Monthly:'Maandelijks',Yearly:'Jaarlijks','Select Amount':'Selecteer Bedrag',Anonymous:'Anoniem',Donate:'Doneer','Powered by':'Ondersteund door',funded:'gefinancierd',Other:'Ander',Amount:'Bedrag','Total Charge:':'Totale Kosten:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate heeft 0% platformkosten voor organisatoren en vertrouwt op de vrijgevigheid van donateurs zoals jij om onze service te laten functioneren.','Thank you for including a tip of':'Bedankt voor het geven van een fooi van:','Enter Amount':'Voer bedrag in','First Name':'Voornaam','Last Name':'Achternaam','Email Address':'E-mailadres',Currency:'Valuta','The minimum amount is':'Het minimale bedrag is','The maximum amount is':'Het maximale bedrag is','Must be between':'Moet tussen',and:'en',characters:'Tekens','Please enter a valid email.':'Voer een geldig e-mailadres in.','Fundraiser is either closed by time or owner closed it!':'De inzamelingsactie is ofwel gesloten door tijd of door de eigenaar!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Selecteer de valuta waarin je wilt doneren. Als dit anders is dan de standaardvaluta, wordt het bedrag automatisch omgewisseld.',closed:'gesloten',},pt:{of:'de','One Time':'Uma Vez',Monthly:'Mensal',Yearly:'Anual','Select Amount':'Selecionar Montante',Anonymous:'Anônimo',Donate:'Doar','Powered by':'Potencializado por',funded:'financiado',Other:'Outro',Amount:'Montante','Total Charge:':'Carga Total:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate tem uma taxa de plataforma de 0% para organizadores e depende da generosidade de doadores como você para operar nosso serviço.','Thank you for including a tip of':'Obrigado por incluir uma gorjeta de','Enter Amount':'Inserir Montante','First Name':'Nome','Last Name':'Sobrenome','Email Address':'Endereço de Email',Currency:'Moeda','The minimum amount is':'O valor mínimo é','The maximum amount is':'O valor máximo é','Must be between':'Deve estar entre',and:'e',characters:'caracteres','Please enter a valid email.':'Por favor, insira um e-mail válido.','Fundraiser is either closed by time or owner closed it!':'A campanha de arrecadação de fundos foi encerrada por hora ou o proprietário a fechou!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Selecione a moeda em que deseja fazer a doação. Se for diferente da moeda padrão, o montante será convertido automaticamente.',closed:'fechado',},ro:{of:'de','One Time':'O singură dată',Monthly:'Lunar',Yearly:'Anual','Select Amount':'Selectați suma',Anonymous:'Anonim',Donate:'Donează','Powered by':'Propulsat de',funded:'finanțat',Other:'Altul',Amount:'Sumă','Total Charge:':'Taxă totală:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate are o taxă de platformă de 0% pentru organizatori și se bazează pe generozitatea donatorilor ca dvs. pentru a opera serviciul nostru.','Thank you for including a tip of':'Vă mulțumim pentru includerea unui bacșiș','Enter Amount':'Introduceți suma','First Name':'Prenume','Last Name':'Nume','Email Address':'Adresa de email',Currency:'Monedă','The minimum amount is':'Suma minimă este','The maximum amount is':'Suma maximă este','Must be between':'Trebuie să fie între',and:'și',characters:'caractere','Please enter a valid email.':'Vă rugăm să introduceți o adresă de email validă.','Fundraiser is either closed by time or owner closed it!':'Strângerea de fonduri este fie închisă la timp, fie proprietarul a închis-o!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Selectați moneda în care doriți să faceți donația. Dacă este diferită de moneda implicită, suma va fi schimbată automat.',closed:'închis',},sk:{of:'z','One Time':'Jednorazovo',Monthly:'Mesačne',Yearly:'Ročne','Select Amount':'Vyberte sumu',Anonymous:'Anonymný',Donate:'Darovať','Powered by':'Poháňaný',funded:'Financované',Other:'iné',Amount:'Suma','Total Charge:':'Celkový poplatok:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate má 0% poplatok za platformu pre organizátorov a funguje vďaka štedrosti darcov ako ste vy.','Thank you for including a tip of':'Ďakujeme za pridanie tipu','Enter Amount':'Zadajte sumu','First Name':'Krstné meno','Last Name':'Priezvisko','Email Address':'Emailová adresa',Currency:'Mena','The minimum amount is':'Minimálna suma je','The maximum amount is':'Maximálna suma je','Must be between':'Musí byť medzi',and:'a',characters:'znakov','Please enter a valid email.':'Zadajte platný email.','Fundraiser is either closed by time or owner closed it!':'Zbierka je buď uzavretá časom alebo ju uzavrel majiteľ!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Vyberte menu, v ktorej chcete darovať. Ak je odlišná od predvolenej meny, suma bude automaticky prepočítaná.',closed:'Uzavreté',},es:{of:'de','One Time':'Una vez',Monthly:'Mensual',Yearly:'Anual','Select Amount':'Seleccione cantidad',Anonymous:'Anónima',Donate:'Donar','Powered by':'Energizado por',funded:'fundada',Other:'Otra',Amount:'Cantidad','Total Charge:':'Carga total:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate tiene una tarifa de plataforma del 0 % para los organizadores y depende de la generosidad de donantes como usted para operar nuestro servicio.','Thank you for including a tip of':'Gracias por incluir un consejo de','Enter Amount':'Introduzca la cantidad','First Name':'Nombre de pila','Last Name':'Apellido','Email Address':'Dirección de Email',Currency:'Divisa','The minimum amount is':'El monto mínimo es','The maximum amount is':'El importe máximo es','Must be between':'Debe estar entre',and:'y',characters:'caracteres','Please enter a valid email.':'Por favor introduzca de Email válida.','Fundraiser is either closed by time or owner closed it!':'La recaudación de fondos está cerrada por tiempo o el propietario la cerró!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Selecciona la moneda en la que deseas realizar la donación. Si es diferente a la moneda predeterminada, el importe se cambiará automáticamente.',closed:'cerrada',},fr:{of:'de','One Time':'Une Fois',Monthly:'Mensuel',Yearly:'Annuel','Select Amount':'Sélectionnez le Montant',Anonymous:'Anonyme',Donate:'Faire un Don','Powered by':'Propulsé par',funded:'financé',Other:'Autre',Amount:'Montant','Total Charge:':'Frais Totaux :','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate a des frais de plateforme de 0 % pour les organisateurs et compte sur la générosité de donateurs comme vous pour faire fonctionner notre service.','Thank you for including a tip of':"Merci d'avoir inclus un pourboire de",'Enter Amount':'Entrez le Montant','First Name':'Prénom','Last Name':'Nom','Email Address':'Adresse E-Mail',Currency:'Devise','The minimum amount is':'Le montant minimum est','The maximum amount is':'Le montant maximum est','Must be between':'Doit être compris entre',and:'et',characters:'caractères','Please enter a valid email.':'Veuillez saisir une adresse e-mail valide.','Fundraiser is either closed by time or owner closed it!':"La collecte de fonds est soit fermée par heure, soit le propriétaire l'a fermée !",'Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Sélectionnez la devise dans laquelle vous souhaitez faire le don. Si elle est différente de la devise par défaut, le montant sera échangé automatiquement.',closed:'fermé',},cs:{of:'z','One Time':'Jednou',Monthly:'Měsíční',Yearly:'Roční','Select Amount':'Vyberte Částka',Anonymous:'Anonymní',Donate:'Darovat','Powered by':'Poháněno',funded:'financované',Other:'Jiný',Amount:'Množství','Total Charge:':'Celkový Poplatek:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate má pro organizátory 0% poplatek za platformu a při provozování naší služby spoléhá na štědrost dárců, jako jste vy.','Thank you for including a tip of':'Děkuji za zařazení tipu','Enter Amount':'Vložit Sumu','First Name':'Jméno','Last Name':'Příjmení','Email Address':'Emailová Adresa',Currency:'Měna','The minimum amount is':'Minimální částka je','The maximum amount is':'Maximální částka je','Must be between':'Musí být mezi',and:'a',characters:'postavy','Please enter a valid email.':'Prosím zadejte platný email.','Fundraiser is either closed by time or owner closed it!':'Sbírka je buď uzavřena časem, nebo ji uzavřel majitel!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Vyberte měnu, ve které chcete darovat. Pokud se liší od výchozí měny, bude částka automaticky směněna.',closed:'ZAVŘENO',},hr:{of:'od','One Time':'Jednom',Monthly:'Mjesečno',Yearly:'Godišnje','Select Amount':'Odaberite Iznos',Anonymous:'Anonimno',Donate:'Donirajte','Powered by':'Powered by',funded:'financiran',Other:'Ostalo',Amount:'Iznos','Total Charge:':'Ukupna Naknada:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate ima 0% naknade za platformu za organizatore i oslanja se na velikodušnost donatora poput vas za upravljanje našom uslugom.','Thank you for including a tip of':'Hvala što ste uključili savjet o','Enter Amount':'Unesite Iznos','First Name':'Ime','Last Name':'Prezime','Email Address':'Email Adresa',Currency:'Valuta','The minimum amount is':'Minimalni iznos je','The maximum amount is':'Maksimalni iznos je','Must be between':'Mora biti između',and:'i',characters:'likovi','Please enter a valid email.':'Unesite valjanu e-poštu.','Fundraiser is either closed by time or owner closed it!':'Prikupljanje sredstava zatvoreno je zbog vremena ili ga je zatvorio vlasnik!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Odaberite valutu u kojoj želite dati donaciju. Ako se razlikuje od zadane valute, iznos će se automatski zamijeniti.',closed:'zatvoreno',},uk:{of:'з','One Time':'Одного разу',Monthly:'Щомісяця',Yearly:'Щорічно','Select Amount':'Виберіть Сума',Anonymous:'Анонім',Donate:'Пожертвуйте','Powered by':'На основі',funded:'фінансується',Other:'Інший',Amount:'Сума','Total Charge:':'ЗагальнаСума:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate має 0% комісії за платформу для організаторів і покладається на щедрість таких жертводавців, як ви, для роботи нашого сервісу.','Thank you for including a tip of':'Дякуємо, що додали підказку','Enter Amount':'Введіть Суму','First Name':"Ім'я",'Last Name':'Прізвище','Email Address':'Адреса електронної пошти',Currency:'Валюта','The minimum amount is':'Мінімальна сума становить','The maximum amount is':'Максимальна сума становить','Must be between':'Має бути між',and:'і',characters:'персонажів','Please enter a valid email.':'Введіть дійсну адресу електронної пошти.','Fundraiser is either closed by time or owner closed it!':'Збір коштів або закрито через час, або власник закрив його!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Виберіть валюту, в якій ви хочете зробити пожертву. Якщо вона відрізняється від валюти за умовчанням, сума буде обміняна автоматично.',closed:'ЗАЧИНЕНО',},pl:{of:'z','One Time':'Jeden raz',Monthly:'Miesięczny',Yearly:'Rocznie','Select Amount':'Wybierz Kwota',Anonymous:'Anonimowy',Donate:'Podarować','Powered by':'Obsługiwane przez',funded:'finansowane',Other:'Inny',Amount:'Kwota','Total Charge:':'Łączna opłata:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate ma 0% opłaty za platformę dla organizatorów i polega na hojności darczyńców takich jak Ty, aby obsługiwać nasze usługi.','Thank you for including a tip of':'Dziękujemy za dodanie wskazówki','Enter Amount':'Wprowadź Ilość','First Name':'Imię','Last Name':'Nazwisko','Email Address':'Adres e-mail',Currency:'Waluta','The minimum amount is':'Minimalna kwota to','The maximum amount is':'Maksymalna kwota to','Must be between':'Musi być pomiędzy',and:'I',characters:'postacie','Please enter a valid email.':'Proszę podać poprawny adres e-mail.','Fundraiser is either closed by time or owner closed it!':'Zbiórka jest albo zamknięta z czasem, albo właściciel ją zamknął!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Wybierz walutę, w której chcesz przekazać darowiznę. Jeżeli jest ona inna niż domyślna waluta, kwota zostanie wymieniona automatycznie.',closed:'Zamknięte',},sv:{of:'av','One Time':'En Gång',Monthly:'En gång i månaden',Yearly:'Årlig','Select Amount':'Välj Belopp',Anonymous:'Anonym',Donate:'Donera','Powered by':'Drivs av',funded:'finansieras',Other:'Övrig',Amount:'Belopp','Total Charge:':'Total kostnad:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate har en plattformsavgift på 0 % för arrangörer och förlitar sig på generositeten hos givare som du för att driva vår tjänst.','Thank you for including a tip of':'Tack för att du inkluderade ett tips','Enter Amount':'Ange Belopp','First Name':'Förnamn','Last Name':'Efternamn','Email Address':'E-postadress',Currency:'Valuta','The minimum amount is':'Minsta belopp är','The maximum amount is':'Maxbeloppet är','Must be between':'Måste vara mellan',and:'och',characters:'tecken','Please enter a valid email.':'Ange en giltig e-postadress.','Fundraiser is either closed by time or owner closed it!':'Insamlingen är antingen stängd av tid eller så har ägaren stängt den!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Välj den valuta som du vill göra donationen i. Om den skiljer sig från standardvalutan kommer beloppet att växlas automatiskt.',closed:'stängd',},fi:{of:'/','One Time':'Kerran',Monthly:'Kuukausittain',Yearly:'Vuosittain','Select Amount':'Valitse Summa',Anonymous:'Nimetön',Donate:'Lahjoittaa','Powered by':'Voimanlähteenä',funded:'rahoitettu',Other:'muu',Amount:'Määrä','Total Charge:':'Kokonaismaksu:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonatella on 0 %:n alustamaksu järjestäjille, ja se luottaa kaltaisten lahjoittajien anteliaisuuteen palvelumme hoitamisessa.','Thank you for including a tip of':'Kiitos vinkin sisällyttämisestä','Enter Amount':'Syötä Summa','First Name':'Etunimi','Last Name':'Sukunimi','Email Address':'Sähköpostiosoite',Currency:'Valuutta','The minimum amount is':'Vähimmäismäärä on','The maximum amount is':'Suurin määrä on','Must be between':'Täytyy olla välillä',and:'ja',characters:'hahmoja','Please enter a valid email.':'Anna kelvollinen sähköpostiosoite.','Fundraiser is either closed by time or owner closed it!':'Varainkeruu on joko päättynyt ajan kuluessa tai omistaja sulki sen!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Valitse valuutta, jolla haluat tehdä lahjoituksen. Jos se on eri kuin oletusvaluutta, summa vaihdetaan automaattisesti.',closed:'suljettu',},it:{of:'Di','One Time':'Una volta',Monthly:'Mensile',Yearly:'Annuale','Select Amount':'Seleziona importo',Anonymous:'Anonima',Donate:'Donare','Powered by':'Offerto da',funded:'finanziata',Other:'Altra',Amount:'Quantità','Total Charge:':'Costo totale:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate prevede una commissione di piattaforma pari allo 0% per gli organizzatori e fa affidamento sulla generosità di donatori come te per gestire il nostro servizio.','Thank you for including a tip of':'Grazie per aver incluso un suggerimento','Enter Amount':"Inserire l'importo",'First Name':'Nome di battesimo','Last Name':'Cognome','Email Address':'Indirizzo email',Currency:'Valuta','The minimum amount is':"L'importo minimo è",'The maximum amount is':"L'importo massimo è",'Must be between':'Deve essere compreso tra',and:'E',characters:'caratteri','Please enter a valid email.':'Inserisci una email valida.','Fundraiser is either closed by time or owner closed it!':'La raccolta fondi è stata chiusa per tempo oppure è stata chiusa dal proprietario!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':"Seleziona la valuta in cui vuoi effettuare la donazione. Se è diversa dalla valuta predefinita, l'importo verrà convertito automaticamente.",closed:'chiusa',},da:{of:'af','One Time':'En gang',Monthly:'Månedlige',Yearly:'Årligt','Select Amount':'Vælg Beløb',Anonymous:'Anonym',Donate:'Doner','Powered by':'Drevet af',funded:'finansieret',Other:'Andet',Amount:'Beløb','Total Charge:':'Samlet afgift:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'WhyDonate har et platformsgebyr på 0 % for arrangører og er afhængig af donorernes generøsitet som dig til at drive vores service.','Thank you for including a tip of':'Tak for at inkludere et tip','Enter Amount':'Indtast beløb','First Name':'Fornavn','Last Name':'Efternavn','Email Address':'Email adresse',Currency:'Betalingsmiddel','The minimum amount is':'Minimumsbeløbet er','The maximum amount is':'Det maksimale beløb er','Must be between':'Skal være imellem',and:'og',characters:'tegn','Please enter a valid email.':'Indtast venligst en gyldig e-mail.','Fundraiser is either closed by time or owner closed it!':'Pengeindsamler er enten lukket af tid, eller ejeren lukkede den!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Vælg den valuta, som du vil give donationen i. Hvis den er forskellig fra standardvalutaen, vil beløbet blive udvekslet automatisk.',closed:'lukket',},hu:{of:'nak,-nek','One Time':'Egyszer',Monthly:'Havi',Yearly:'Évi','Select Amount':'Válassza az Összeg lehetőséget',Donate:'Adományozni',Anonymous:'Névtelen','Powered by':'Powered by',funded:'finanszírozott',Other:'Egyéb',Amount:'Összeg','Total Charge:':'Teljes díj:','WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.':'A WhyDonate 0%-os platformdíjat számít fel a szervezőknek, és a hozzád hasonló adományozók nagylelkűségére támaszkodik szolgáltatásunk működtetésében.','Thank you for including a tip of':'Köszönjük, hogy beírtál egy tippet','Enter Amount':'Adja meg az összeget','First Name':'Keresztnév','Last Name':'Vezetéknév','Email Address':'Email cím',Currency:'Valuta','The minimum amount is':'A minimális összeg az','The maximum amount is':'A maximális összeg','Must be between':'Között kell lennie',and:'és',characters:'karakterek','Please enter a valid email.':'Kérlek létező email címet adj meg.','Fundraiser is either closed by time or owner closed it!':'Az adománygyűjtés vagy idővel lezárult, vagy a tulajdonos lezárta!','Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':'Válassza ki azt a pénznemet, amelyben adományozni kíván. Ha eltér az alapértelmezett pénznemtől, az összeg automatikusan átváltásra kerül.',closed:'zárva',},};return translations[lang]&&translations[lang][text]?translations[lang][text]:text;}
+function _e(text,lang){let result;switch(lang){case 'de':switch(text){case 'of':result='of';break;case 'One Time':result='Einmalig';break;case 'Monthly':result='Monatlich';break;case 'Yearly':result='Jährlich';break;case 'Select Amount':result='Betrag auswählen';break;case 'Anonymous':result='Anonym';break;case 'Donate':result='Spenden';break;case 'Powered by ':result='Angetrieben von ';break;case 'funded':result='finanziert ';break;case 'Other':result='Andere ';break;case 'Amount':result='Menge';break;case 'Total Charge:':result='Gesamtsumme:';break;case 'Whydonate has a 0% platform fee for organizers and relies on the generosity of donors like you to operate our service.':result='Whydonate erhebt eine Plattformgebühr von 0% für Organisatoren und ist auf die Großzügigkeit von Spendern wie Ihnen angewiesen, um unseren Dienst zu betreiben.';break;case 'Thank you for including a tip of ':result='Vielen Dank, dass Sie einen Tipp mit aufgenommen haben ';break;case 'Enter amount':result='Menge eingeben';break;case 'First Name':result='Vorname';break;case 'Last Name':result='Nachname';break;case 'Email Address':result='E-Mail-Addresse';break;case 'Currency':result='Währung';break;case 'The minimum amount is':result='Der Mindestbetrag beträgt';break;case 'The maximum amount is':result='Der Höchstbetrag beträgt';break;case 'Must be between':result='Muss zwischen';break;case 'and':result='und';break;case 'characters':result='Zeichen';break;case 'Please enter a valid email.':result='Bitte geben Sie eine gültige E-Mail-Adresse ein.';break;case 'Fundraiser is either closed by time or owner closed it!':result='Eine Spendenaktion ist entweder aufgrund von Zeit abgeschlossen oder vom Eigentümer geschlossen.';break;case 'Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':result='Wählen Sie die Währung aus, in der Sie die Spende tätigen möchten. Ist sie anders als die Standardwährung, wird der Betrag automatisch umgerechnet.';break;case 'closed':result='geschlossen';break;default:result=text;}
+break;case 'en':switch(text){case 'of':result='of';break;case 'One Time':result='';break;case 'Monthly':result='Monthly';break;case 'Yearly':result='Yearly';break;case 'Select Amount':result='Select Amount';break;case 'Anonymous':result='Anonymous';break;case 'Donate':result='Donate';break;case 'Powered by ':result='Powered by ';break;case 'funded':result='funded ';break;case 'Other':result='Other ';break;case 'Amount':result='Amount';break;case 'Total Charge:':result='Total Charge:';break;case 'Whydonate has a 0% platform fee for organizers and relies on the generosity of donors like you to operate our service.':result='';break;case 'Thank you for including a tip of ':result='Thank you for including a tip of ';break;case 'Enter amount':result='Enter Amount';break;case 'First Name':result='First Name';break;case 'Last Name':result='Last Name';break;case 'Email Address':result='Email Address';break;case 'Currency':result='Currency';break;case 'The minimum amount is':result='The minimum amount is';break;case 'The maximum amount is':result='The maximum amount is';break;case 'Must be between':result='Must be between';break;case 'and':result='and';break;case 'characters':result='characters';break;case 'Please enter a valid email.':result='Please enter a valid email.';break;case 'Fundraiser is either closed by time or owner closed it!':result='Fundraiser is either closed by time or owner closed it.';break;case 'Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':result='Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.';break;case 'closed':result='closed';break;default:result=text;}
+break;case 'es':switch(text){case 'of':result='de';break;case 'One Time':result='';break;case 'Monthly':result='Mensual';break;case 'Yearly':result='Anualmente';break;case 'Select Amount':result='Seleccione la cantidad';break;case 'Anonymous':result='Anónimo';break;case 'Donate':result='Donaciones';break;case 'Powered by ':result='Impulsado por ';break;case 'funded':result='financiado ';break;case 'Other':result='Otros';break;case 'Amount':result='Cantidad';break;case 'Total Charge:':result='Cargo total:';break;case 'Whydonate has a 0% platform fee for organizers and relies on the generosity of donors like you to operate our service.':result='';break;case 'Thank you for including a tip of ':result='Propina para WhyDonate ';break;case 'Enter amount':result='Ingrese la cantidad';break;case 'First Name':result='Nombre';break;case 'Last Name':result='Apellido';break;case 'Email Address':result='Dirección de email';break;case 'Currency':result='Moneda';break;case 'The minimum amount is':result='El importe mínimo es de';break;case 'The maximum amount is':result='El importe máximo es de';break;case 'Must be between':result='Debe estar entre';break;case 'and':result='y';break;case 'characters':result='caracteres';break;case 'Please enter a valid email.':result='Por favor, introduce una dirección de email válida';break;case 'Fundraiser is either closed by time or owner closed it!':result='La recaudación de fondos está cerrada por tiempo o el propietario la cerró.';break;case 'Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':result='Seleccione la moneda en la que desea realizar la donación. Si es diferente de la moneda predeterminada, el monto se cambiará automáticamente.';break;case 'closed':result='cerrado';break;default:result=text;}
+break;case 'nl':switch(text){case 'of':result='van';break;case 'One Time':result='Eénmalig';break;case 'Monthly':result='Maandelijks';break;case 'Yearly':result='Jaarlijks';break;case 'Select Amount':result='Selecteer bedrag';break;case 'Anonymous':result='Anoniem';break;case 'Donate':result='Doneer';break;case 'Powered by ':result='Ondersteund door ';break;case 'funded':result='gefinancierd ';break;case 'Other':result='Anders';break;case 'Amount':result='Bedrag';break;case 'Total Charge:':result='Totaalbedrag:';break;case 'Whydonate has a 0% platform fee for organizers and relies on the generosity of donors like you to operate our service.':result='Whydonate heeft 0% platformkosten voor organisatoren en we rekenen op de vrijgevigheid van donateurs zoals jij om onze service te garanderen.';break;case 'Thank you for including a tip of ':result='Bedankt voor het toevoegen van een fooi van ';break;case 'Enter amount':result='Voer bedrag in';break;case 'First Name':result='Voornaam';break;case 'Last Name':result='Achternaam';break;case 'Email Address':result='E-mailadres';break;case 'Currency':result='Valuta';break;case 'The minimum amount is':result='Het minimumbedrag is';break;case 'The maximum amount is':result='Het maximumbedrag is';break;case 'Must be between':result='Moet tussen';break;case 'and':result='en';break;case 'characters':result='tekens';break;case 'Please enter a valid email.':result='Voer alstublieft een geldig e-mailadres in';break;case 'Fundraiser is either closed by time or owner closed it!':result='Inzamelingsactie is ofwel gesloten vanwege tijd, of de eigenaar heeft deze gesloten.';break;case 'Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':result='Selecteer de valuta waarin je de donatie wilt doen. Als deze afwijkt van de standaardvaluta, wordt het bedrag automatisch omgewisseld.';break;case 'closed':result='gesloten';break;default:result=text;}
+break;case 'fr':switch(text){case 'of':result='de';break;case 'One Time':result='Une fois';break;case 'Monthly':result='Mensuel';break;case 'Annual':result='Annuel';break;case 'Select Amount':result='Sélectionner le montant';break;case 'Anonymous':result='Anonyme';break;case 'Donate':result='Faire un don';break;case 'Powered by ':result='Alimenté par ';break;case 'funded':result='financé';break;case 'Other':result='Autre';break;case 'Amount':result='Montant';break;case 'Total Charge:':result='Charge totale:';break;case 'Whydonate has a 0% platform fee for organizers and relies on the generosity of donors like you to operate our service.':result='Whydonate propose des frais de plateforme de 0 % aux organisateurs et compte sur la générosité de donateurs comme vous pour faire fonctionner notre service.';break;case 'Thank you for including a tip of ':result="Merci d'avoir inclus un conseil de ";break;case 'Enter amount':result='Entrer le montant';break;case 'First Name':result='Prénom';break;case 'Last Name':result='Nom de famille';break;case 'Email Address':result='Adresse e-mail';break;case 'Currency':result='Monnaie';break;case 'The minimum amount is':result='Le montant minimum est de';break;case 'The maximum amount is':result='Le montant maximum est de';break;case 'Must be between':result='Doit être entre';break;case 'and':result='et';break;case 'characters':result='caractères';break;case 'Please enter a valid email.':result='Veuillez entrer un email valide';break;case 'Fundraiser is either closed by time or owner closed it!':result="La collecte de fonds est soit fermée par le temps, soit le propriétaire l'a fermée.";break;case 'Select the currency in which you want to make the donation. If it is different from the default currency, the amount will be exchanged automatically.':result='Sélectionnez la devise dans laquelle vous souhaitez effectuer le don. Si elle est différente de la devise par défaut, le montant sera échangé automatiquement.';break;case 'closed':result='fermé';break;default:result=text;}
+break;default:result=text;}
+return result;}
 function convertHtmlStringToHtml(htmlString){const tempElement=document.createElement('div');tempElement.innerHTML=htmlString;return tempElement.firstChild;}
 function stringToBinary(str){const textEncoder=new TextEncoder();const uint8Array=textEncoder.encode(str);const binaryString=Array.from(uint8Array).map((byte)=>byte.toString(2).padStart(8,'0')).join('');return binaryString;}
 function binaryToString(binaryString){const chunks=binaryString.match(/.{1,8}/g);const decodedString=chunks.map((chunk)=>String.fromCharCode(parseInt(chunk,2))).join('');return decodedString;}
 function showInterval(index,tip_enabled,id,shortcode,donation_options_binary,font){let selectedDonationDptionsString=binaryToString(donation_options_binary)||'';var widgetIdValue=document.getElementById(`widget-id-${shortcode}`).innerHTML;var donationOptionsSection=document.getElementById(`interval-container-${widgetIdValue}`);var otherAmountNumber=document.getElementById(`other-amount-div-${widgetIdValue}`);if(index===0){selected_interval_object[widgetIdValue]='once';donationOptionsSection.innerHTML=selectedDonationDptionsString;currency_value_updater(widgetIdValue,tip_enabled,font);otherAmountNumber.style.display='none';}else if(index===1){selected_interval_object[widgetIdValue]='monthly';donationOptionsSection.innerHTML=selectedDonationDptionsString;currency_value_updater(widgetIdValue,tip_enabled,font);otherAmountNumber.style.display='none';}else if(index===2){selected_interval_object[widgetIdValue]='yearly';donationOptionsSection.innerHTML=selectedDonationDptionsString;currency_value_updater(widgetIdValue,tip_enabled,font);otherAmountNumber.style.display='none';}}
-async function fundraiser_donation_values_api(id){let currency_select=document.getElementById(`currency-select-${id}`).value;let fundraiser_slug_value=document.getElementById(`widget-slug-${id}`).innerHTML;if(fundraiser_slug_value&&currency_select){let url=`${wdplugin_fundraiser_worker_url}/fundraiser/wp/donation/values?slug=${fundraiser_slug_value}&currency=${currency_select}`;let response=await fetch(url);let response_json=await response.json();currency_code_object[id]=response_json.data.currency;currency_symbol_object[id]=response_json.data.symbol;return response_json;}}
-async function fundraiser_donation_values_share_api(id,currencyCode='none'){if(currencyCode=='none'){currency_select=document.getElementById(`currency-select-${id}`);currencyCode=currency_select.value;}
-if(id){let url=`${wdplugin_fundraiser_worker_url}/fundraiser/donation/values?slug=${id}&currency=${currencyCode}`;let response=await fetch(url);let response_json=await response.json();currency_code_object[id]=response_json.data.currency;currency_symbol_object[id]=response_json.data.symbol;return response_json;}}
-async function currency_value_updater(id,tip_enabled,font){let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let currency_select=document.getElementById(`currency-select-${id}`);let source=document.getElementById(`source-${id}`);if(currency_select.value!=currency_code_object[id]){if(source=='share_mode'){fundraiser_donation_values_object[id]=await fundraiser_donation_values_share_api(id);}else{fundraiser_donation_values_object[id]=await fundraiser_donation_values_api(id);}
-fundraiser_donation_values_response=fundraiser_donation_values_object[id];}
-if(tip_enabled==1){var tip_box_span=document.getElementById(`tip-box-span-curr-symbol-${id}`);tip_box_span.innerHTML=fundraiser_donation_values_response.data.symbol;var tip_box_input=document.getElementById(`input-tip${id}`);tip_box_input.value=fundraiser_donation_values_response.data.tip_amount.default_values.tip_amount_fixed_default;}
-let lang=document.getElementById(`language-code-${id}`).innerHTML;var first_radio=document.getElementById('select-amount-first-'+id);var first_radio_label=document.getElementById('amount-boundary-box-1-label-'+id);var second_radio=document.getElementById('select-amount-second-'+id);var second_radio_label=document.getElementById('amount-boundary-box-2-label-'+id);var third_radio=document.getElementById('select-amount-third-'+id);var third_radio_label=document.getElementById('amount-boundary-box-3-label-'+id);var forth_radio=document.getElementById('select-amount-forth-'+id);var forth_radio_label=document.getElementById('amount-boundary-box-4-label-'+id);var open_amount_symbol=document.getElementById('open-amount-number-currency-symbol-'+id);var other_amount_symbol=document.getElementById(`other-amount-div-currency-symbol-${id}`);var openAmountNumber=document.getElementById('open-amount-number-'+id);var otherRadio=document.getElementById('select-amount-other-'+id);if(selected_interval_object[id]=='once'){fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_1;if(first_radio){first_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_1;}
+async function fundraiser_donation_values_api(id){let currency_select=document.getElementById(`currency-select-${id}`);let fundraiser_slug_value=document.getElementById(`widget-slug-${id}`).innerHTML;let url=`${wdplugin_fundraiser_worker_url}/fundraiser/wp/donation/values?slug=${fundraiser_slug_value}&currency=${currency_select.value}`;let response=await fetch(url);let response_json=await response.json();currency_code_object[id]=response_json.data.currency;currency_symbol_object[id]=response_json.data.symbol;return response_json;}
+async function currency_value_updater(id,tip_enabled,font){let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let currency_select=document.getElementById(`currency-select-${id}`);if(currency_select.value!=currency_code_object[id]){fundraiser_donation_values_object[id]=await fundraiser_donation_values_api(id);fundraiser_donation_values_response=fundraiser_donation_values_object[id];}
+var tip_box_span=document.getElementById(`tip-box-span-curr-symbol-${id}`);tip_box_span.innerHTML=fundraiser_donation_values_response.data.symbol;var tip_box_input=document.getElementById(`input-tip${id}`);tip_box_input.value=fundraiser_donation_values_response.data.tip_amount.default_values.tip_amount_fixed_default;var first_radio=document.getElementById('select-amount-first-'+id);var first_radio_label=document.getElementById('amount-boundary-box-1-label-'+id);var second_radio=document.getElementById('select-amount-second-'+id);var second_radio_label=document.getElementById('amount-boundary-box-2-label-'+id);var third_radio=document.getElementById('select-amount-third-'+id);var third_radio_label=document.getElementById('amount-boundary-box-3-label-'+id);var forth_radio=document.getElementById('select-amount-forth-'+id);var forth_radio_label=document.getElementById('amount-boundary-box-4-label-'+id);var open_amount_symbol=document.getElementById('open-amount-number-currency-symbol-'+id);var other_amount_symbol=document.getElementById(`other-amount-div-currency-symbol-${id}`);var openAmountNumber=document.getElementById('open-amount-number-'+id);var otherRadio=document.getElementById('select-amount-other-'+id);if(selected_interval_object[id]=='once'){fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_1;if(first_radio){first_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_1;}
 if(first_radio_label){first_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_1,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_1;}
 if(second_radio){second_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_2;}
 if(second_radio_label){second_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_2,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_2;}
 if(third_radio){third_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_3;}
 if(third_radio_label){third_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_3,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_3;}
 if(forth_radio){forth_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_4;}
 if(forth_radio_label){forth_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_4,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.onetime.default_4;}
 if(open_amount_symbol){open_amount_symbol.innerHTML=currency_symbol_object[id]+' ';}
 if(openAmountNumber){openAmountNumber.value=0;}
 if(other_amount_symbol){other_amount_symbol.innerHTML=currency_symbol_object[id]+' ';}}else if(selected_interval_object[id]=='monthly'){if(first_radio){first_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_1;}
 if(first_radio_label){first_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_1,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_1;}
 if(second_radio){second_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_2;}
 if(second_radio_label){second_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_2,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_2;}
 if(third_radio){third_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_3;}
 if(third_radio_label){third_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_3,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_3;}
 if(forth_radio){forth_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_4;}
 if(forth_radio_label){forth_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_4,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.monthly.default_4;}
 if(open_amount_symbol){open_amount_symbol.innerHTML=currency_symbol_object[id]+' ';}
 if(openAmountNumber){openAmountNumber.value=0;}
 if(other_amount_symbol){other_amount_symbol.innerHTML=currency_symbol_object[id]+' ';}}else if(selected_interval_object[id]=='yearly'){if(first_radio){first_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_1;}
 if(first_radio_label){first_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_1,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_1;}
 if(second_radio){second_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_2;}
 if(second_radio_label){second_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_2,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_2;}
 if(third_radio){third_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_3;}
 if(third_radio_label){third_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_3,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_3;}
 if(forth_radio){forth_radio.value=fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_4;}
 if(forth_radio_label){forth_radio_label.innerHTML=fundraiser_donation_values_response.data.symbol+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_4,lang);}
+fundraiser_donation_values_response.data.customdonationconfiguration.yearly.default_4;}
 if(open_amount_symbol){open_amount_symbol.innerHTML=currency_symbol_object[id]+' ';}
 if(openAmountNumber){openAmountNumber.value=0;}
 if(other_amount_symbol){other_amount_symbol.innerHTML=currency_symbol_object[id]+' ';}}
 if(tip_enabled==1){createTipboxDropDown(id,'#9E9E9E',font);handleTipDropdownNew(id);}}
-function checkVideoUrl(url){const vimeoPattern=/^(?:https?:\/\/)?(?:www\.)?(?:vimeo\.com\/)(\d+)(?:\S+)?$/;const youtubePattern=/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:embed\/|watch\?v=|v\/|shorts\/)|youtu\.be\/)([\w\-]+)(?:\S+)?$/;if(url.match(vimeoPattern)){return this.generateVimeoIframe(url);}else if(url.match(youtubePattern)){return this.generateYouTubeIframe(url);}else{return 'unknown';}}
+function checkVideoUrl(url){const vimeoPattern=/^(?:https?:\/\/)?(?:www\.)?(?:vimeo\.com\/)(\d+)(?:\S+)?$/;const youtubePattern=/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:embed\/|watch\?v=|v\/)|youtu\.be\/)([\w\-]+)(?:\S+)?$/;if(url.match(vimeoPattern)){return this.generateVimeoIframe(url);}else if(url.match(youtubePattern)){return this.generateYouTubeIframe(url);}else{return 'unknown';}}
 function generateVimeoIframe(videoLink){const vimeoVideoId=this.getVideoIdVimeo(videoLink);return `https://vumbnail.com/${vimeoVideoId}.jpg`;}
 function generateYouTubeIframe(videoLink){const videoId=this.getVideoIdYoutube(videoLink);return `https://i.ytimg.com/vi/${videoId}/mqdefault.jpg`;}
-function getVideoIdYoutube(videoLink){const pattern=/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:embed\/|watch\?v=|v\/|shorts\/)|youtu\.be\/)([\w\-]+)(?:\S+)?$/;const match=videoLink?.match(pattern);return match&&match[1]?match[1]:'';}
+function getVideoIdYoutube(videoLink){const pattern=/^(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:embed\/|watch\?v=|v\/)|youtu\.be\/)([\w\-]+)(?:\S+)?$/;const match=videoLink?.match(pattern);return match&&match[1]?match[1]:'';}
 function getVideoIdVimeo(videoLink){const pattern=/^(?:https?:\/\/)?(?:www\.)?(?:vimeo\.com\/)(\d+)(?:\S+)?$/;const match=videoLink?.match(pattern);return match&&match[1]?match[1]:'';}
-function getValidLanguageCode(fullLocale){var languageCode=fullLocale.substr(0,2);switch(languageCode){case 'en':case 'fr':case 'es':case 'de':case 'nl':break;default:languageCode='en';break;}
-return languageCode;}
-function differentiateUrl(url){var currentUrl=url;var ipRegex=/^(?:[0-9]{1,3}\.){3}[0-9]{1,3}$/;if(ipRegex.test(currentUrl)){return whydonate_home_url;}else if(currentUrl.indexOf('localhost')!==-1){return whydonate_home_url;}else if(currentUrl.endsWith('.html')){return whydonate_home_url;}else{return currentUrl;}}
-async function shortcode_func_html_generator(options={},slug='',language_code='',success_url='',fail_url='',source=''){let shortcode=options.shortcode||'';let id=options.id||'id';let pluginStyle=options.pluginStyle||'Default';let primaryColorCode=options.primaryColor||'#32BF55';let secondaryColorCode=options.secondaryColor||'#363396';let color=options.colorCode||'';let showDonateButton=options.showDonateButton||0;let showProgressBar=options.showProgressBar||0;let showRaisedAmount=options.showRaisedAmount||0;let showEndDate=options.showEndDate||0;let showDonationFormOnly=options.showDonationFormOnly||0;let doNotShowBox=options.doNotShowBox||0;let oneTimeCheck=options.oneTimeCheck||0;let monthlyCheck=options.monthlyCheck||0;let yearlyCheck=options.yearlyCheck||0;let firstAmountCheck=options.firstAmountCheck||0;let secondAmountCheck=options.secondAmountCheck||0;let thirdAmountCheck=options.thirdAmountCheck||0;let forthAmountCheck=options.forthAmountCheck||0;let otherChecked=options.otherChecked||0;let firstAmount=options.firstAmount||0;let secondAmount=options.secondAmount||0;let thirdAmount=options.thirdAmount||0;let forthAmount=options.forthAmount||0;let firstAmountMonthly=options.firstAmountMonthly||0;let secondAmountMonthly=options.secondAmountMonthly||0;let thirdAmountMonthly=options.thirdAmountMonthly||0;let forthAmountMonthly=options.fourthAmountMonthly||0;let firstAmountYearly=options.firstAmountYearly||0;let secondAmountYearly=options.secondAmountYearly||0;let thirdAmountYearly=options.thirdAmountYearly||0;let forthAmountYearly=options.fourthAmountYearly||0;let font=options.font||'';let flocalId=options.flocalId||0;let progress_bar=options.progress_bar||0.0;let progress_bar_width=options.progress_bar_width||0.0;let appearanceWindowHeight=options.appearanceWindowHeight||199;let selectInterval=0;let donationTitle=options.donationTitle||'';let elapsed=options.elapsed||'';let fundraiserTitle=options.fundraiserTitle||'';let buttonRadius=options.buttonRadius||30;let tip_enabled=true;let stripe_status=options.stripe_status||true;let fundraising_local_id='';let background='';let background_allowed=options.background_allowed||0;let open_amount=options.open_amount||0;let open_amount_monthly=options.open_amount_monthly||0;let open_amount_yearly=options.open_amount_yearly||0;let card_shadow=options.card_shadow||1;await loadFont(font);currency_code_object[id]='eur';currency_symbol_object[id]='€';var html_lang=document.documentElement.lang||'en';if(slug==''){slug=options.slug||options.slugName||'';}
-if(language_code==''){language_code=options.language_code||'en';}else if(language_code=='auto'){language_code=getValidLanguageCode(html_lang);}else{switch(language_code){case 'en':case 'fr':case 'es':case 'de':case 'nl':case 'bg':case 'el':case 'pt':case 'ro':case 'sk':case 'hr':case 'uk':case 'pl':case 'sv':case 'fi':case 'it':case 'da':case 'hu':break;default:language_code='en';break;}}
+async function shortcode_func_html_generator(options={},slug='',language_code='',success_url='',fail_url='',source=''){let shortcode=options.shortcode||'';let id=options.id||'id';let pluginStyle=options.pluginStyle||'Default';let primaryColorCode=options.primaryColor||'#32BF55';let secondaryColorCode=options.secondaryColor||'#363396';let color=options.colorCode||'';let showDonateButton=options.showDonateButton||0;let showProgressBar=options.showProgressBar||0;let showRaisedAmount=options.showRaisedAmount||0;let showEndDate=options.showEndDate||0;let showDonationFormOnly=options.showDonationFormOnly||0;let doNotShowBox=options.doNotShowBox||0;let oneTimeCheck=options.oneTimeCheck||0;let monthlyCheck=options.monthlyCheck||0;let yearlyCheck=options.yearlyCheck||0;let firstAmountCheck=options.firstAmountCheck||0;let secondAmountCheck=options.secondAmountCheck||0;let thirdAmountCheck=options.thirdAmountCheck||0;let forthAmountCheck=options.forthAmountCheck||0;let otherChecked=options.otherChecked||0;let firstAmount=options.firstAmount||0;let secondAmount=options.secondAmount||0;let thirdAmount=options.thirdAmount||0;let forthAmount=options.forthAmount||0;let firstAmountMonthly=options.firstAmountMonthly||0;let secondAmountMonthly=options.secondAmountMonthly||0;let thirdAmountMonthly=options.thirdAmountMonthly||0;let forthAmountMonthly=options.fourthAmountMonthly||0;let firstAmountYearly=options.firstAmountYearly||0;let secondAmountYearly=options.secondAmountYearly||0;let thirdAmountYearly=options.thirdAmountYearly||0;let forthAmountYearly=options.fourthAmountYearly||0;let font=options.font||'';let flocalId=options.flocalId||0;let progress_bar=options.progress_bar||0.0;let progress_bar_width=options.progress_bar_width||0.0;let appearanceWindowHeight=options.appearanceWindowHeight||199;let selectInterval=0;let donationTitle=options.donationTitle||'';let elapsed=options.elapsed||'';let fundraiserTitle=options.fundraiserTitle||'';let buttonRadius=options.buttonRadius||30;let tip_enabled=true;let stripe_status=options.stripe_status||true;let fundraising_local_id='';let background='';let background_allowed=options.background_allowed||0;let open_amount=options.open_amount||0;let open_amount_monthly=options.open_amount_monthly||0;let open_amount_yearly=options.open_amount_yearly||0;let card_shadow=options.card_shadow||1;await loadFont(font);currency_code_object[id]='eur';currency_symbol_object[id]='€';if(slug==''){slug=options.slug||options.slugName||'';}
+if(language_code==''){language_code=options.language_code||'en';}else{switch(language_code){case 'en':case 'fr':case 'es':case 'de':case 'nl':break;default:languageCode='en';break;}}
 let successUrl;if(success_url){successUrl=options.successUrl||success_url||window.location.href;}
 let failureUrl;if(success_url){failureUrl=options.failureUrl||fail_url||window.location.href;}
 if(pluginStyle=='Default'||pluginStyle=='Standaard'||pluginStyle=='Selecteer een stijl'){font='';primaryColorCode='#32BF55';secondaryColorCode='#363396';showDonateButton=1;showProgressBar=2;showRaisedAmount=3;showEndDate=4;showDonationFormOnly=0;doNotShowBox=0;oneTimeCheck=1;monthlyCheck=2;yearlyCheck=3;firstAmountCheck=1;secondAmountCheck=2;thirdAmountCheck=3;forthAmountCheck=4;otherChecked=1;firstAmount=25;secondAmount=50;thirdAmount=75;forthAmount=100;donationTitle='My Safe Donation';}else{font=font;primaryColorCode=primaryColorCode;secondaryColorCode=secondaryColorCode;showDonateButton=showDonateButton;showProgressBar=showProgressBar;showRaisedAmount=showRaisedAmount;showEndDate=showEndDate;showDonationFormOnly=showDonationFormOnly;doNotShowBox=doNotShowBox;oneTimeCheck=oneTimeCheck;monthlyCheck=monthlyCheck;yearlyCheck=yearlyCheck;firstAmountCheck=firstAmountCheck;secondAmountCheck=secondAmountCheck;thirdAmountCheck=thirdAmountCheck;forthAmountCheck=forthAmountCheck;otherChecked=otherChecked;firstAmount=firstAmount;secondAmount=secondAmount;thirdAmount=thirdAmount;forthAmount=forthAmount;donationTitle=donationTitle;buttonRadius=buttonRadius;}
@@ -113,7 +113,7 @@ font='';colorCode='#2828d6';showDonateButton=1;showProgressBar=2;showRaisedAmoun
 if(showRaisedAmount==0||showProgressBar==0){appearanceWindowHeight=200;}
 if(showRaisedAmount==0&&showProgressBar==0){appearanceWindowHeight=100;}
 let data=response;if(response){fundraiserTitle=addslashes(data?.title);tip_enabled=data?.tip_enabled?1:0;if(data.amount_target){if(data.amount_target!=0){const raw_value=(data.donation.amount/data.amount_target)*100;progress_bar=raw_value.toFixed(2).replace('.',',');if(raw_value>100){progress_bar_width=100;}else if(raw_value==0){progress_bar_width=0;}else{progress_bar_width=progress_bar;}}}}
-const today=new Date();if(data.end_date){const endDate=new Date(data.end_date);if(endDate<today){elapsed='closed';}else{const timeDiff=endDate.getTime()-today.getTime();const daysElapsed=Math.floor(timeDiff/(1000*3600*24));if(daysElapsed<1000){elapsed=daysElapsed;}else{elapsed='';}}}
+const today=new Date();const end_date=new Date();if(data.end_date){const endDate=new Date(data.end_date);if(endDate<today){elapsed='closed';}else{const timeDiff=endDate.getTime()-today.getTime();const daysElapsed=Math.floor(timeDiff/(1000*3600*24));if(daysElapsed<1000){elapsed=daysElapsed;}else{elapsed='';}}}
 if(response){if(data.is_opened!=undefined){if(!data.is_opened||elapsed=='closed'){colorCode='#D3D3D3';}}}
 if((data.amount_target==0)&(background_allowed==0)){appearanceWindowHeight=170;}
 if(data.is_opened==false||elapsed=='closed'){appearanceWindowHeight+=44;}
@@ -123,8 +123,7 @@ btnId='apreview-donate-btn-'+pluginStyle;modalId='donate-window-modal-'+pluginSt
 background_allowed==1&&showDonationFormOnly==0&&doNotShowBox==0?'':'none'
 }";>`;let background_preview_modal=`<img id="form-image-background" src="${background}" style="display:${
 background_allowed==1&&showDonationFormOnly==1?'':'none'
-}";>`;let card_shadow_css;if(card_shadow==1){card_shadow_css='0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;';}else if(card_shadow==2){card_shadow_css='0 3px 1px -2px #0003,0 2px 2px #00000024,0 1px 5px #0000001f;';}else if(card_shadow==3){card_shadow_css='0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;';}else if(card_shadow==4){card_shadow_css='0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;';}
-if(showDonationFormOnly==1&&data['show_donation_details']==false&&data['amount_target']==0){showRaisedAmount=0;}
+}";>`;let card_shadow_css;if(card_shadow==1){card_shadow_css='0 2px 1px -1px #0003, 0 1px 1px #00000024, 0 1px 3px #0000001f;';}else if(card_shadow==2){card_shadow_css='0 3px 1px -2px #0003,0 2px 2px #00000024,0 1px 5px #0000001f;';}else if(card_shadow==3){card_shadow_css='0 2px 4px -1px #0003, 0 4px 5px #00000024, 0 1px 10px #0000001f;';}
 const donation_box=`<div class="style-container-shortcode" id="style-container-shortcode">
     
 
@@ -144,9 +143,7 @@ data['show_donation_details']==true?data.hasOwnProperty('donation')&&data.hasOwn
              ${
 showRaisedAmount==3?`
                  <div class="apreview-collected-amount-div" id="apreview-collected-amount-div" style="font-family: '${font}' !important;">
-                     <label for="apreview-collected-amount" style="display: block; font-size: 32px"><span class="currency-symbol">${
-currency_symbol_object[id]
-}</span> ${formatCurrency(data['donation']['amount'],language_code)}</label>
+                     <label for="apreview-collected-amount" style="display: block; font-size: 32px"><span class="currency-symbol">${currency_symbol_object[id]}</span> ${data['donation']['amount']}</label>
                  </div>
              `:''
 }
@@ -164,7 +161,7 @@ showProgressBar==2&&showRaisedAmount==3?`
                      <div class="apreview-target-amount-div-label-2" id="apreview-target-amount-div-label-2">
                          <label for="apreview-target-amount" style="color: gray; margin-left: 10px; display: block; font-size: 22px"> <span class="currency-symbol">${
 currency_symbol_object[id]
-}</span> ${formatCurrency(data['amount_target'],language_code)}</label>
+}</span> ${data['amount_target']}</label>
                      </div>
                  </div>
              `:''
@@ -177,9 +174,7 @@ currency_symbol_object[id]
 showProgressBar==2&&data['amount_target']!=0?`
                     <div class="apreview-target-amount-div" id="apreview-target-amount-div" style="font-family: '${font}' !important; font-weight: 300; display: flex">
                         <div class="apreview-target-amount-div-label-2" id="apreview-target-amount-div-label-2">
-                            <label for="apreview-target-amount" style="color:#000000de; font-weight: 400; display: block; font-size: 24px"> <span class="currency-symbol">${
-currency_symbol_object[id]
-}</span> ${formatCurrency(data['amount_target'],language_code)}</label>
+                            <label for="apreview-target-amount" style="color:#000000de; font-weight: 400; display: block; font-size: 24px"> <span class="currency-symbol">${currency_symbol_object[id]}</span> ${data['amount_target']}</label>
                         </div>
                     </div>
                 `:''
@@ -196,22 +191,17 @@ data.hasOwnProperty('amount_target')?`
              ${
 showProgressBar==2&&data['amount_target']!=0?`
                  <div class="apreview-full-bar" id="apreview-full-bar">
-                     <div id="apreview-raised-bar" class="apreview-raised-bar" style="width: ${
-data['show_donation_details']==false?0:progress_bar_width
-}%; background-color:${primaryColorCode} !important;">
-					</div>
+                     <div id="apreview-raised-bar" class="apreview-raised-bar" style="width: ${progress_bar_width}%; background-color:${primaryColorCode} !important;"></div>
                  </div>
              `:''
 }
              <div class="apreview-progress-info" id="apreview-progress-info" style="font-family: '${font}' !important;">
                  ${
 showProgressBar==2&&data['amount_target']!=0?`
-                               <div class="apreview-achieved-percent" id="apreview-achieved-percent" >
-                                   <label style="font-family: '${font}' !important;font-size: 14px; font-weight: 300; color: gray; display: ${
-data['show_donation_details']==false?'none':'block'
-}">
-								   ${progress_bar}%${_e('funded',language_code)}</label>
-                               </div>
+                     <div class="apreview-achieved-percent" id="apreview-achieved-percent" >
+                         <label style="font-size: 14px; font-weight: 300; color: gray; display: block">${progress_bar}%
+                             ${_e('funded',language_code)}</label>
+                     </div>
                  `:''
 }
                  ${
@@ -266,13 +256,13 @@ data['is_opened']==false||elapsed=='closed'?`
         <label style="margin-top: 20px; font-family: '${font}' !important; font-size: 14px; font-weight: 400; display: ${
 open_amount==0?'block':'none'
 }">${_e('Select Amount',language_code)}</label>                    
-        <label style="margin-top: 20px; font-family: '${font}' !important; font-size: 14px; font-weight: 400; display: ${
+        <label style="margin-top: 20px; font-family: '${font}' !important;; font-size: 14px; font-weight: 400; display: ${
 open_amount==1?'block':'none'
-}">${_e('Enter Amount',language_code)}</label>                    
+}">${_e('Enter amount',language_code)}</label>                    
         <div class="preview-select-amount-options" id="preview-select-amount-options-${id}" style="padding-top: 15px;padding-bottom: 15px;">
             <div id ="donation-option-amount" style="display:${
 open_amount==0?'flex':'none'
-};flex-direction:row;gap:16px;flex-wrap: wrap;">
+};flex-direction:row;gap:16px;flex-wrap: unset;">
                 ${
 firstAmountCheck==1?`
                 <div class="amount-boundary-box-1-s" id="amount-boundary-box-1-s-${id}" style="text-align: center; position: relative; background-color: ${
@@ -282,9 +272,7 @@ selectInterval==1?primaryColorCode:''
 selectInterval==1&&open_amount==0?'checked':''
 } name="select-amount-${id}" id="select-amount-first-${id}" onchange="selectFirstAmount('${primaryColorCode}', '${id}', ${tip_enabled})" style="margin-left: -5px; z-index: 10; position: absolute;" />
                     <label for="select-amount-first-${id}" id="amount-boundary-box-1-label-${id}"  style="font-family: '${font}' !important; font-size: 16px; font-weight: 600;">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(firstAmount,language_code)
+currency_symbol_object[id]+' '+firstAmount
 }</label>
                 </div>
                 `:''
@@ -300,9 +288,7 @@ selectInterval==2&&open_amount==0?'checked':''
                     <label for="select-amount-second-${id}" id = "amount-boundary-box-2-label-${id}" style="font-family: '${font}' !important; font-size: 16px; font-weight: 600${
 selectInterval==2?';color:white;':''
 }">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(secondAmount,language_code)
+currency_symbol_object[id]+' '+secondAmount
 }</label>
                 </div>
                 `:''
@@ -318,9 +304,7 @@ selectInterval==3&&open_amount==0?'checked':''
                     <label for="select-amount-third-${id}" id="amount-boundary-box-3-label-${id}" style="font-family: '${font}' !important; font-size: 16px; font-weight: 600${
 selectInterval==3?';color:white;':''
 }">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(thirdAmount,language_code)
+currency_symbol_object[id]+' '+thirdAmount
 }</label>
                 </div>
                 `:''
@@ -336,9 +320,7 @@ selectInterval==4&&open_amount==0?'checked':''
                     <label for="select-amount-forth-${id}" id="amount-boundary-box-4-label-${id}" style="font-family: '${font}' !important; font-size: 16px; font-weight: 600${
 selectInterval==4?';color:white;':''
 }">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(forthAmount,language_code)
+currency_symbol_object[id]+' '+forthAmount
 }</label>
                 </div>
                 `:''
@@ -377,12 +359,12 @@ open_amount_monthly==0?'block':'none'
 }">${_e('Select Amount',language_code)}</label>                    
         <label style="margin-top: 20px; font-family: '${font}' !important; font-size: 14px; font-weight: 400; display: ${
 open_amount_monthly==1?'block':'none'
-}">${_e('Enter Amount',language_code)}</label>     
+}">${_e('Enter amount',language_code)}</label>     
     <div class="preview-select-amount-options" id="preview-select-amount-options-${id}" style="padding-top: 15px;padding-bottom: 15px;">
         
         <div id ="donation-option-amount" style="display:${
 open_amount_monthly==0?'flex':'none'
-};flex-direction:row;flex-wrap:wrap;gap:16px;">
+};flex-direction:row;flex-wrap:unset;gap:16px;">
         ${
 firstAmountCheck==1?`
             <div class="amount-boundary-box-1-s" id="amount-boundary-box-1-s-${id}" style="text-align: center; position: relative; background-color: ${
@@ -392,9 +374,7 @@ selectInterval==1?primaryColorCode:''
 selectInterval==1&&open_amount_monthly==0?'checked':''
 } name="select-amount-${id}" id="select-amount-first-${id}" onchange="selectFirstAmount('${primaryColorCode}', '${id}', ${tip_enabled})" style="margin-left: -5px; z-index: 10; position: absolute;" />
                 <label for="select-amount-first-${id}" id="amount-boundary-box-1-label-${id}"  style="font-family: '${font}' !important; font-size: 16px; font-weight: 600">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(firstAmountMonthly,language_code)
+currency_symbol_object[id]+' '+firstAmountMonthly
 }</label>
             </div>
             `:''
@@ -410,9 +390,7 @@ selectInterval==2&&open_amount_monthly==0?'checked':''
                 <label for="select-amount-second-${id}" id = "amount-boundary-box-2-label-${id}" style="font-family: '${font}' !important; font-size: 16px; font-weight: 600${
 selectInterval==2?';color:white;':''
 }">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(secondAmountMonthly,language_code)
+currency_symbol_object[id]+' '+secondAmountMonthly
 }</label>
             </div>
             `:''
@@ -428,9 +406,7 @@ selectInterval==3&&open_amount_monthly==0?'checked':''
                 <label for="select-amount-third-${id}" id="amount-boundary-box-3-label-${id}" style="font-family: '${font}' !important; font-size: 16px; font-weight: 600${
 selectInterval==3?';color:white;':''
 }">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(thirdAmountMonthly,language_code)
+currency_symbol_object[id]+' '+thirdAmountMonthly
 }</label>
             </div>
             `:''
@@ -446,9 +422,7 @@ selectInterval==4&&open_amount_monthly==0?'checked':''
                 <label for="select-amount-forth-${id}" id="amount-boundary-box-4-label-${id}" style="font-family: '${font}' !important; font-size: 16px; font-weight: 600${
 selectInterval==4?';color:white;':''
 }">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(forthAmountMonthly,language_code)
+currency_symbol_object[id]+' '+forthAmountMonthly
 }</label>
             </div>
             `:''
@@ -487,11 +461,11 @@ open_amount_yearly==0?'block':'none'
 }">${_e('Select Amount',language_code)}</label>                    
         <label style="margin-top: 20px; font-family: '${font}' !important; font-size: 14px; font-weight: 400; display: ${
 open_amount_yearly==1?'block':'none'
-}">${_e('Enter Amount',language_code)}</label>             
+}">${_e('Enter amount',language_code)}</label>             
     <div class="preview-select-amount-options " id="preview-select-amount-options-${id}" style="padding-top: 15px;padding-bottom: 15px;">
         <div id ="donation-option-amount" style="display:${
 open_amount_yearly==0?'flex':'none'
-};flex-direction:row;flex-wrap:wrap; gap:16px;">        
+};flex-direction:row;flex-wrap:unset; gap:16px;">        
             ${
 firstAmountCheck==1?`
             <div class="amount-boundary-box-1-s" id="amount-boundary-box-1-s-${id}" style="text-align: center; position: relative; background-color: ${
@@ -501,9 +475,7 @@ selectInterval==1?primaryColorCode:''
 selectInterval==1&&open_amount_yearly==0?'checked':''
 } name="select-amount-${id}" id="select-amount-first-${id}" onchange="selectFirstAmount('${primaryColorCode}', '${id}', ${tip_enabled})" style="margin-left: -5px; z-index: 10; position: absolute;" />
                 <label for="select-amount-first-${id}" id="amount-boundary-box-1-label-${id}"  style="font-family: '${font}' !important; font-size: 16px; font-weight: 600 ">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(firstAmountYearly,language_code)
+currency_symbol_object[id]+' '+firstAmountYearly
 }</label>
             </div>
             `:''
@@ -519,9 +491,7 @@ selectInterval==2&&open_amount_yearly==0?'checked':''
                 <label for="select-amount-second-${id}" id = "amount-boundary-box-2-label-${id}" style="font-family: '${font}' !important; font-size: 16px; font-weight: 600${
 selectInterval==2?';':''
 }">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(secondAmountYearly,language_code)
+currency_symbol_object[id]+' '+secondAmountYearly
 }</label>
             </div>
             `:''
@@ -537,9 +507,7 @@ selectInterval==3&&open_amount_yearly==0?'checked':''
                 <label for="select-amount-third-${id}" id="amount-boundary-box-3-label-${id}" style="font-family: '${font}' !important; font-size: 16px; font-weight: 600${
 selectInterval==3?';':''
 }">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(thirdAmountYearly,language_code)
+currency_symbol_object[id]+' '+thirdAmountYearly
 }</label>
             </div>
             `:''
@@ -555,9 +523,7 @@ selectInterval==4&&open_amount_yearly==0?'checked':''
                 <label for="select-amount-forth-${id}" id="amount-boundary-box-4-label-${id}" style="font-family: '${font}' !important; font-size: 16px; font-weight: 600${
 selectInterval==4?';':''
 }">${
-currency_symbol_object[id]+
-' '+
-formatCurrency(forthAmountYearly,language_code)
+currency_symbol_object[id]+' '+forthAmountYearly
 }</label>
             </div>
             `:''
@@ -593,14 +559,13 @@ currency_symbol_object[id]
     `;let selected_donation_options='';if(oneTimeCheck!=0){selected_donation_options=donation_options;}else if(oneTimeCheck==0&&monthlyCheck!=0){selected_donation_options=donation_options_monthly;}else if(oneTimeCheck==0&&monthlyCheck==0&&yearlyCheck!=0){selected_donation_options=donation_options_yearly;}
 const donation_window_modal_content=` 
     <!-- Modal content -->
-    <div class="donate-window-content" style="font-family: '${font}' !important;">
+    <div class="donate-window-content" style="font-family: '${font}' !important; min-width: 200% !important">
         <div id="widget-id-${shortcode}" style="display:none;">${id}</div>
         <div id="widget-slug-${id}" style="display:none;">${slug}</div>
         <div id="language-code-${id}" style="display:none;">${language_code}</div>
-        <div id="source-${id}" style="display:none;">${source}</div>
 
-        <div class="preview" id="preview-${id}" style="margin-left: ${
-showDonationFormOnly==1?'0px;':'30px;'
+        <div class="preview preview_box" id="preview-${id}" style="margin-left: ${
+showDonationFormOnly==1?'5%;':'30%;'
 }; ${showDonationFormOnly==1?'z-index:0 !important;':''}">
 
             <div class="preview-card" id="preview-card-${id}" style="box-shadow:${
@@ -626,8 +591,6 @@ showDonationFormOnly!=1?`<span class="close-wp" id="${id}">&times;</span>`:''
 
                <div id = "progress-bar-modal" style="display: ${
 showDonationFormOnly==1?';':'none;'
-}${
-showDonationFormOnly==1&&data['show_donation_details']==false&&data['amount_target']==0?'height:0px !important;':''
 }">
                    <div class="apreview-amount-raised" id="apreview-amount-raised" style="align-items: baseline; height: ${
 showRaisedAmount==0?'0px':'40px'
@@ -637,9 +600,7 @@ data['show_donation_details']==true?data.hasOwnProperty('donation')&&data.hasOwn
                    ${
 showRaisedAmount==3?`
                        <div class="apreview-collected-amount-div" id="apreview-collected-amount-div" style="font-family: '${font}' !important;">
-                           <label for="apreview-collected-amount" style="display: block; font-size: 32px"><span class="currency-symbol">${
-currency_symbol_object[id]
-}</span> ${formatCurrency(data['donation']['amount'],language_code)}</label>
+                           <label for="apreview-collected-amount" style="display: block; font-size: 32px"><span class="currency-symbol">${currency_symbol_object[id]}</span> ${data['donation']['amount']}</label>
                        </div>
                    `:''
 }
@@ -657,7 +618,7 @@ showProgressBar==2&&showRaisedAmount==3?`
                            <div class="apreview-target-amount-div-label-2" id="apreview-target-amount-div-label-2">
                                <label for="apreview-target-amount" style="color: gray; margin-left: 10px; display: block; font-size: 22px"> <span class="currency-symbol">${
 currency_symbol_object[id]
-}</span> ${formatCurrency(data['amount_target'],language_code)}</label>
+}</span> ${data['amount_target']}</label>
                            </div>
                        </div>
                    `:''
@@ -670,9 +631,7 @@ currency_symbol_object[id]
 showProgressBar==2&&data['amount_target']!=0?`
                           <div class="apreview-target-amount-div" id="apreview-target-amount-div" style="font-family: '${font}' !important; font-weight: 300; display: flex">
                               <div class="apreview-target-amount-div-label-2" id="apreview-target-amount-div-label-2">
-                                  <label for="apreview-target-amount" style="color:#000000de; font-weight: 400; display: block; font-size: 24px"> <span class="currency-symbol">${
-currency_symbol_object[id]
-}</span> ${formatCurrency(data['amount_target'],language_code)}</label>
+                                  <label for="apreview-target-amount" style="color:#000000de; font-weight: 400; display: block; font-size: 24px"> <span class="currency-symbol">${currency_symbol_object[id]}</span> ${data['amount_target']}</label>
                               </div>
                           </div>
                       `:''
@@ -688,22 +647,17 @@ currency_symbol_object[id]
 data.hasOwnProperty('amount_target')?`
                        ${
 showProgressBar==2&&data['amount_target']!=0?`
-						<div class="apreview-full-bar" id="apreview-full-bar">
-							<div id="apreview-raised-bar" class="apreview-raised-bar" style="width: ${
-data['show_donation_details']==false?0:progress_bar_width
-}%; background-color:${primaryColorCode} !important;">
-							</div>
-						</div>
+                           <div class="apreview-full-bar" id="apreview-full-bar">
+                               <div id="apreview-raised-bar" class="apreview-raised-bar" style="width: ${progress_bar_width}%; background-color:${primaryColorCode} !important;"></div>
+                           </div>
                        `:''
 }
                        <div class="apreview-progress-info" id="apreview-progress-info" style="font-family: '${font}' !important;">
                            ${
 showProgressBar==2&&data['amount_target']!=0?`
                                <div class="apreview-achieved-percent" id="apreview-achieved-percent" >
-                                   <label style="font-family: '${font}' !important;font-size: 14px; font-weight: 300; color: gray; display: ${
-data['show_donation_details']==false?'none':'block'
-}">
-								   ${progress_bar}%${_e('funded',language_code)}</label>
+                                   <label style="font-family: '${font}' !important;font-size: 14px; font-weight: 300; color: gray; display: block">${progress_bar}%
+                                       ${_e('funded',language_code)}</label>
                                </div>
                            `:''
 }
@@ -737,7 +691,7 @@ oneTimeCheck==1?`
                         <input type="radio" value="once" name="period-intervals-${id}" id="onetime-radio-${id}" onchange="changeOnetimeBar('${secondaryColorCode}', '${id}')" ${
 selectInterval==1?'checked':''
 } 
-                        onclick="showInterval(0, ${tip_enabled}, '${id}', '${shortcode}','${stringToBinary(donation_options)}', '${font}')" />
+                        onclick="showInterval(0, ${tip_enabled}, ${id}, '${shortcode}','${stringToBinary(donation_options)}', '${font}')" />
                         <label for="onetime-radio-${id}" style="font-family: '${font}' !important;display: block; font-size: 14px;">${_e('One Time',language_code)}</label>
                     </div>
                     `:''
@@ -748,7 +702,7 @@ monthlyCheck==2?`
                     <div class="preview-intervals-monthly" id="preview-intervals-monthly-${id}" style="padding-top: 20px;">
                         <input type="radio" value="monthly" name="period-intervals-${id}" id="monthly-radio-${id}" onchange="changeMonthlyBar('${secondaryColorCode}', '${id}')" ${
 selectInterval==2?'checked':''
-} onclick="showInterval(1, ${tip_enabled}, '${id}', '${shortcode}','${stringToBinary(donation_options_monthly)}', '${font}')" />
+} onclick="showInterval(1, ${tip_enabled}, ${id}, '${shortcode}','${stringToBinary(donation_options_monthly)}', '${font}')" />
                         <label for="monthly-radio-${id}" style="font-family: '${font}' !important; font-size: 14px; display: block">${_e('Monthly',language_code)}</label>
                     </div>
                     `:''
@@ -759,7 +713,7 @@ yearlyCheck==3?`
                     <div class="preview-intervals-yearly" id="preview-intervals-yearly-${id}" style="padding-top: 20px;">
                         <input type="radio" value="yearly" name="period-intervals-${id}" id="yearly-radio-${id}" onchange="changeYearlyBar('${secondaryColorCode}', '${id}')" ${
 selectInterval==3?'checked':''
-} onclick="showInterval(2, ${tip_enabled}, '${id}', '${shortcode}','${stringToBinary(donation_options_yearly)}', '${font}')"  />
+} onclick="showInterval(2, ${tip_enabled}, ${id}, '${shortcode}','${stringToBinary(donation_options_yearly)}', '${font}')"  />
                         <label for="yearly-radio-${id}" style="font-family: '${font}' !important; font-size: 14px; display: block">${_e('Yearly',language_code)}</label>
                     </div>
                     `:''
@@ -796,7 +750,7 @@ selectInterval==3?secondaryColorCode:''
                 </div>
 
                 <div class="preview-select-amount-s" id="preview-select-amount-s-${id}">
-                        <div id="currency-options" style="padding-top: 20px;">
+                        <div id="currency-options" style="padding-top: 0px; display:none">
                             <label for="currency-select" style="font-family: '${font}' !important;">${_e('Currency',language_code)} 
                                 <div class="info-img-container">
                                     <img src="https://whydonate.com/cdn-cgi/imagedelivery/_0vgnXOEIHPwLg2E52a7gg/shared/infoWarnBlack/public">
@@ -828,15 +782,32 @@ currency_symbol_object[id]
 
                         `:''
 }
+                        <div class="preview-user-info-div" id="review-user-info-div-${id}" style="margin-top: 0px; margin-bottom: 0px;">
+                        <div class="preview-user-info-firstname-s" id="preview-user-info-firstname-${id}" style="height:0px !important; margin-top:0px; margin-bottom:0px">
+                            <!-- <p>First Name</p> -->
+                            <input type="text" id="firstname-${id}" name="firstName-${id}" placeholder="${_e('First Name',language_code)}" value="Nombre" style="display: none; visibility:hidden; max-height: 0; background-color: white; width: 100%; padding-left:16px !important; height: 0%; font-family: '${font}' !important; font-size: 0px; border-radius: 0px; border: 0px solid !important; margin-top:0px; margin-bottom:0px">
+                        </div>
+                        <label id="show-firstname-error-msg-${id}" style="display: none; font-size: 10px; color: red">${_e('Must be between',language_code)} 1 ${_e('and',language_code)} 30 ${_e('characters',language_code)}.</label>
+                        <div class="preview-user-info-lastname-s" id="preview-user-info-lastname-${id}" style="height:0px !important; margin-top:0px; margin-bottom:0px">
+                            <!-- <p>Last Name</p> -->
+                            <input type="text" id="lastname-${id}" name="lastName-${id}" placeholder="${_e('Last Name',language_code)}" value="Apellidos" style="display: none; visibility:hidden; max-height: 0; background-color: white; width: 100%; padding-left:16px !important;height: 0%; font-family: '${font}' !important; font-size: 0px; border-radius: 0px; border: 0px solid !important; margin-top:0px; margin-bottom:0px">
+                        </div>
+                        <label id="show-lastname-error-msg-${id}" style="display: none; font-size: 10px; color: red">${_e('Must be between',language_code)} 1 ${_e('and',language_code)} 30 ${_e('characters',language_code)}.</label>
+                        <div class="preview-user-info-email-s" id="preview-user-info-email-${id}" style="height:0px !important; margin-top:0px; margin-bottom:0px">
+                            <!-- <p>Email</p> -->
+                            <input type="text" id="email-${id}" name="email-${id}" placeholder="${_e('Email Address',language_code)}" value="donacion@email.com" style="display: none; visibility:hidden; max-height: 0; background-color: white; width: 100%; padding-left:16px !important;height: 0%; font-family: '${font}' !important; font-size: 0px; border-radius: 0px; border: 0px solid !important; margin-top:0px; margin-bottom:0px">
+                        </div>
+                        <label id="show-email-error-msg-${id}" style="display: none; font-size: 10px; color: red">${_e('Please enter a valid email.',language_code)}</label>
+                    </div>
 
                     <!-- tipbox -->
                     ${
-tip_enabled?`<div id="tip-box-${id}" class="tip-box" style="display: none; font-family: ${font} !important;" data-id="${id}" data-color="${secondaryColorCode}" data-lang="${language_code}"></div>`:''
+tip_enabled?`<div id="tip-box-${id}" class="tip-box" style="height:0px; display: none; font-family: ${font} !important;" data-id="${id}" data-color="${secondaryColorCode}" data-lang="${language_code}"></div>`:''
 }
 
                     <div class="preview-user-donate-btn-div" id="preview-user-donate-btn-div-${id}" style="display: flex; flex-direction: column; margin-top: 5px">
                     
-                    <div class="checkbox-if-anonymous-s">
+                    <div class="checkbox-if-anonymous-s" style="display:none !important">
                         <div class="checkbox-if-anonymous-s-checkbox" id="checkbox-if-anonymous-s-checkbox">
                             <input type="checkbox" id="is-anonymous-${id}" class="custom-checkbox default-checkbox-visually-hidden">
                             <label for="is-anonymous-${id}" class="custom-checkbox-label"></label>                        
@@ -866,9 +837,7 @@ data['is_opened']==false||elapsed=='closed'?`
 }
                     </div>
                     <div style="display: flex; width: 100%; height: 20px; justify-content: flex-end; margin-top: 20px; margin-bottom: 10px; align-items: center">
-                        <label style="font-family: '${font}' !important; color:#9E9E9E; font-size: 12px; margin-top: 5px; margin-right: 5px; font-weight: 500">${
-_e('Powered by',language_code)+' '
-}</label>
+                        <label style="font-family: '${font}' !important; color:#9E9E9E; font-size: 12px; margin-top: 5px; margin-right: 5px; font-weight: 500">${_e('Powered by ',language_code)}</label>
                         <a href="https://whydonate.com" target="_blank">
                             <img src="https://whydonate.com/cdn-cgi/imagedelivery/_0vgnXOEIHPwLg2E52a7gg/shared/Variant3/public" style="height: 15px;
                             margin-top: 4px;"/>
@@ -905,7 +874,7 @@ showDonationFormOnly==1?'transparent;':'rgb(0,0,0,0.4);'
             }
         
             .donate-window-content {
-                min-width: 100%;
+                min-width: 90% !important;
                 padding: 0 !important;
             }
         }
@@ -931,38 +900,29 @@ showDonationFormOnly==1?'transparent;':'rgb(0,0,0,0.4);'
                 margin-left: 0px;
             }
         }
-    </style>`:'';let htmlCode=media_rules+donation_box+donation_window_modal;if(source=='edit_preivew'){let existingDiv=document.createElement('div');existingDiv.id=`widget-here-${id}`;existingDiv.style.display='none';document.body.appendChild(existingDiv);var tempContainer=document.createElement('div');tempContainer.innerHTML=htmlCode;var newElement=tempContainer.firstChild;existingDiv.appendChild(newElement);}else{if(source=='share_mode'){if(document.getElementById(`share-widget-${shortcode}`)!=null){if(showDonationFormOnly==1){document.getElementById(`share-widget-${shortcode}`).innerHTML=donation_window_modal_content;}else{document.getElementById(`share-widget-${shortcode}`).innerHTML=htmlCode;}}}else{if(document.getElementById(`widget-here-${shortcode}`)!=null){if(showDonationFormOnly==1){document.getElementById(`widget-here-${shortcode}`).innerHTML=donation_window_modal_content;}else{document.getElementById(`widget-here-${shortcode}`).innerHTML=htmlCode;}}}}
+    </style>`:'';let htmlCode=media_rules+donation_box+donation_window_modal;if(source=='edit_preivew'){let existingDiv=document.createElement('div');existingDiv.id=`widget-here-${id}`;existingDiv.style.display='none';document.body.appendChild(existingDiv);var tempContainer=document.createElement('div');tempContainer.innerHTML=htmlCode;var newElement=tempContainer.firstChild;existingDiv.appendChild(newElement);}else{if(document.getElementById(`widget-here-${shortcode}`)!=null){if(showDonationFormOnly==1){document.getElementById(`widget-here-${shortcode}`).innerHTML=donation_window_modal_content;}else{document.getElementById(`widget-here-${shortcode}`).innerHTML=htmlCode;}}}
 var currencySelectElement=document.getElementById(`currency-select-${id}`);let currencies_array=await get_all_currencies();let currencyData=currencies_array?.data?.list_of_currencies;if(currencySelectElement){for(var i=0;i<currencies_array?.data?.list_of_currencies.length;i++){var option=document.createElement('option');option.value=currencies_array?.data?.list_of_currencies[i].currency;option.text=currencyData[i].symbol+' '+currencyData[i].currency.toUpperCase();currencySelectElement.appendChild(option);if(currencyData[i].currency===currency_code_object[id]){option.setAttribute('selected','selected');}}}
-let donationBoxDiv=document.getElementById(`donate-window-modal-${id}`);if(source=='share_mode'){fundraiser_donation_values_object[id]=await fundraiser_donation_values_share_api(id,currency_code_object[id]);}else{fundraiser_donation_values_object[id]=await fundraiser_donation_values_api(id);}
-var tipBoxArray=document.getElementsByClassName('tip-box');if(tipBoxArray.length>0){for(var i=0;i<tipBoxArray.length;i++){let tipBox=tipBoxArray[i];let id=tipBox.dataset.id;let languageCode=tipBox.dataset.lang;lang=languageCode.split('_')[0];color=tipBox.dataset.color;createTipboxDropDown(id,'#9E9E9E',font);}}
+let donationBoxDiv=document.getElementById(`donate-window-modal-${id}`);fundraiser_donation_values_object[id]=await fundraiser_donation_values_api(id);var tipBoxArray=document.getElementsByClassName('tip-box');if(tipBoxArray.length>0){for(var i=0;i<tipBoxArray.length;i++){let tipBox=tipBoxArray[i];let id=tipBox.dataset.id;let languageCode=tipBox.dataset.lang;lang=languageCode.split('_')[0];color=tipBox.dataset.color;createTipboxDropDown(id,'#9E9E9E',font);}}
 let urlAddress=window.location.href;if(urlAddress.includes('&orderId=')){let urlAddressArr=urlAddress.split('&orderId=');let orderId=urlAddressArr[1].split('&')[0];getDonorStatus(orderId,success_url,fail_url);let actualUrlArr=urlAddress.split('?donorId=');let donorId=urlAddressArr[1].split('&')[0];var donorInfo=localStorage.getItem('donor_info');donorInfo=JSON.parse(donorInfo);donorInfo['orderId']=urlAddressArr[1].split('&client=')[0];window.history.replaceState({},document.title,actualUrlArr[0]);var url=`${wdplugin_donation_worker_url}/donation/order/status/?order_id=${orderId}`;var params='action=check_order_status&order_id='+urlAddressArr[1].split('&')[0];fetch(url+'?'+params).then(function(response){return response.json();}).then(function(data){if(data['status']=='canceled'||data['status']=='open'){window.location.replace(fail_url);}else if(data['status']=='paid'){window.location.replace(success_url);}else{}}).catch(function(error){}).finally(function(){});}
 else{let domainPart=urlAddress.split('//');let domain=domainPart[1].split('/')[0];let payload={url:domain,product:'plugin',};await checkInstallations(payload);}
 if(source=='edit_preivew'){return{donation_box:donation_box,donation_window_modal:donationBoxDiv.innerHTML,};}}
 var whydonateSlugs={};var lang='';function showDonateWindow(id,tip_enabled,colorCode,languageCode){document.getElementsByTagName('body')[0].style.overflow='hidden';document.getElementsByTagName('body')[0].style.height='100vh';lang=languageCode.split('_')[0];var modal=document.getElementById('donate-window-modal-'+id);var btn=document.getElementById('apreview-donate-btn-'+id);var span=document.getElementById(''+id);if(modal.style.display=='flex'){modal.style.display='none';}else{modal.style.display='flex';}
 span.onclick=function(){document.getElementsByTagName('body')[0].style.overflow='';document.getElementsByTagName('body')[0].style.height='initial';modal.style.display='none';};window.onclick=function(event){if(event.target==modal){document.getElementsByTagName('body')[0].style.overflow='';document.getElementsByTagName('body')[0].style.height='initial';modal.style.display='none';}};}
 async function loadFont(fontName){var link=document.createElement('link');link.rel='stylesheet';link.href='https://fonts.googleapis.com/css?family='+encodeURIComponent(fontName);document.head.appendChild(link);}
-function createTipboxDropDown(id,color,font){let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let lang=document.getElementById(`language-code-${id}`).innerHTML;var cardDiv=document.getElementById('preview-'+id);cardDiv.style.height='910px';document.getElementById('preview-card-'+id).style.height='845px';var tipBox=document.getElementById('tip-box-'+id);tipBox.className='tip-box';tipBox.style.display='block';tipBox.style.height='auto';tipBox.style.marginTop='15px';tipBox.style.padding='5px';tipBox.style.paddingLeft='10px';tipBox.style.backgroundColor=color+'10';var para1=document.createElement('p');para1.style.fontSize='12px';para1.style.fontWeight='400';para1.style.color='black';para1.textContent=_e('WhyDonate has a 0% platform fee for organisers and relies on the generosity of donors like you to operate our service.',lang);if(!tipBox.innerHTML){tipBox.appendChild(para1);}
-var selectPercentileDiv=document.createElement('div');selectPercentileDiv.id='whydonate-select-percentile-div'+id;selectPercentileDiv.style.display='flex';selectPercentileDiv.style.justifyContent='space-around';var para2=document.createElement('p');para2.style.fontSize='12px';para2.style.fontWeight='400';para2.style.color='black';para2.style.marginTop='6px';para2.textContent=_e('Thank you for including a tip of',lang)+' ';selectPercentileDiv.appendChild(para2);var selectElement=document.createElement('select');selectElement.classList.add('whydonate-currecy-selected');var selectedValue=getSelectedValue(id);let options;if(selectedValue>=10){options=[{text:'15% ('+
-formatCurrency((selectedValue*0.15).toFixed(2),lang)+
-')',value:(selectedValue*0.15).toFixed(2),},{text:'5% ('+
-formatCurrency((selectedValue*0.05).toFixed(2),lang)+
-')',value:(selectedValue*0.05).toFixed(2),},{text:'10% ('+
-formatCurrency((selectedValue*0.1).toFixed(2),lang)+
-')',value:(selectedValue*0.1).toFixed(2),},{text:_e('Other',lang),value:'Amount'},];}else{options=[{text:currency_symbol_object[id]+
+function createTipboxDropDown(id,color,font){let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let lang=document.getElementById(`language-code-${id}`).innerHTML;var cardDiv=document.getElementById('preview-'+id);cardDiv.style.height='910px';document.getElementById('preview-card-'+id).style.height='845px';var tipBox=document.getElementById('tip-box-'+id);tipBox.className='tip-box';tipBox.style.display='block';tipBox.style.height='0px';tipBox.style.marginTop='0px';tipBox.style.padding='0px';tipBox.style.paddingLeft='0px';tipBox.style.backgroundColor=color+'10';var para1=document.createElement('p');para1.style.fontSize='12px';para1.style.fontWeight='400';para1.style.color='black';para1.textContent=_e('Whydonate has a 0% platform fee for organizers and relies on the generosity of donors like you to operate our service.',lang);if(!tipBox.innerHTML){tipBox.appendChild(para1);}
+var selectPercentileDiv=document.createElement('div');selectPercentileDiv.id='whydonate-select-percentile-div'+id;selectPercentileDiv.style.display='none';selectPercentileDiv.style.justifyContent='space-around';var para2=document.createElement('p');para2.style.fontSize='12px';para2.style.fontWeight='400';para2.style.color='black';para2.style.marginTop='6px';para2.textContent=_e('Thank you for including a tip of ',lang);selectPercentileDiv.appendChild(para2);var selectElement=document.createElement('select');selectElement.classList.add('whydonate-currecy-selected');var selectedValue=getSelectedValue(id);let options;if(selectedValue>=10){options=[{text: currency_symbol_object[id]+' '+0, value: 0,},{text:'5% ('+(selectedValue*0.05).toFixed(2)+')',value:(selectedValue*0.05).toFixed(2),},{text:'10% ('+(selectedValue*0.1).toFixed(2)+')',value:(selectedValue*0.1).toFixed(2),},{text:_e('Amount',lang),value:'Amount'},];}else{options=[{text: currency_symbol_object[id]+' '+0, value: 0,},{text:currency_symbol_object[id]+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.third_option,lang),value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.third_option,},{text:currency_symbol_object[id]+
+fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.first_option,value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.first_option,},{text:currency_symbol_object[id]+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.first_option,lang),value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.first_option,},{text:currency_symbol_object[id]+
-' '+
-formatCurrency(fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.second_option,lang),value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.second_option,},{text:_e('Other',lang),value:'Amount'},];}
-options.forEach(function(optionData){var option=document.createElement('option');option.text=optionData.text;option.value=optionData.value;selectElement.appendChild(option);});selectElement.setAttribute('id',`select-dropdown-${id}`);selectElement.setAttribute('onchange',`handleTipDropdownOnChange(${id}, this.value)`);selectPercentileDiv.appendChild(selectElement);var inputTipDiv=document.createElement('div');inputTipDiv.id='input-tip-div'+id;inputTipDiv.style.display='none';inputTipDiv.style.justifyContent='flex-end';inputTipDiv.style.marginTop='10px';var inputTipSpan=document.createElement('div');var inputTipTextBox=document.createElement('input');inputTipSpan.innerHTML=inputTipTextBox.outerHTML;inputTipSpan.innerHTML=`<div class="tip-box-span" style="font-family: ${font} !important;"><span id="tip-box-span-curr-symbol-${id}" class="tip-box-span-curr-symbol">${currency_symbol_object[id]}</span>`+
+fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.second_option,value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.second_option,},{text:_e('Amount',lang),value:'Amount'},];}
+options.forEach(function(optionData){var option=document.createElement('option');option.text=optionData.text;option.value=optionData.value;selectElement.appendChild(option);});selectElement.setAttribute('id',`select-dropdown-${id}`);selectElement.setAttribute('onchange',`handleTipDropdownOnChange(${id}, this.value)`);selectPercentileDiv.appendChild(selectElement);var inputTipDiv=document.createElement('div');inputTipDiv.id='input-tip-div'+id;inputTipDiv.style.display='none';inputTipDiv.style.justifyContent='flex-end';inputTipDiv.style.marginTop='10px';var inputTipSpan=document.createElement('span');var inputTipTextBox=document.createElement('input');inputTipSpan.innerHTML=inputTipTextBox.outerHTML;inputTipSpan.innerHTML=`<div class="tip-box-span" style="font-family: ${font} !important;"><span id="tip-box-span-curr-symbol-${id}" class="tip-box-span-curr-symbol">${currency_symbol_object[id]}</span>`+
 ' '+
 '<input type="text"'+
 'id="input-tip'+
 id+
 '"'+
 `onkeyup = "calculateTotalAmountDropDown('${id}', 'Amount')"`+
-` value=${fundraiser_donation_values_response.data.tip_amount.default_values.tip_amount_fixed_default}  name="currency" value="1.00" style="width: 110px; height: 25px; border-radius: 3px !important; border-color: transparent !important; font-family: '${font}' !important; font-size: 15px; text-align: right; background: white !important; min-height: auto !important"></div>`+
+` value=${fundraiser_donation_values_response.data.tip_amount.default_values.tip_amount_fixed_default}  name="currency" value="0.00" style="width: 110px; height: 25px; border-radius: 3px !important; border-color: transparent !important; font-family: '${font}' !important; font-size: 15px; text-align: right; background: white !important; min-height: auto !important"></div>`+
 `<label id="show-other-tip-error-msg-${id}" style="font-size: 10px; color: red; visibility: hidden; display:none">${_e('The minimum amount is',lang)} ${
 fundraiser_donation_values_response?.data?.symbol+
 fundraiser_donation_values_response?.data?.customdonationconfiguration?.min_donation_amount
@@ -971,22 +931,13 @@ fundraiser_donation_values_response?.data?.symbol+
 fundraiser_donation_values_response?.data?.customdonationconfiguration.max_donation_amount
 } </label>`;inputTipDiv.appendChild(inputTipSpan);var selectPercentileDivElement=document.getElementById('whydonate-select-percentile-div'+id);if(!selectPercentileDivElement){tipBox.appendChild(selectPercentileDiv);}
 var inputTipDivElement=document.getElementById('input-tip-div'+id);if(!inputTipDivElement){tipBox.appendChild(inputTipDiv);}
-var totalChargeDiv=document.createElement('div');totalChargeDiv.id='whydonate-total-charge-div'+id;totalChargeDiv.style.height='20px';totalChargeDiv.style.marginTop='10px';totalChargeDiv.style.textAlign='right';var totalChargeLabel=document.createElement('label');totalChargeLabel.id='total-charge-label'+id;totalChargeLabel.style.fontFamily=font;totalChargeLabel.style.fontSize='15px';totalChargeLabel.innerHTML=_e('Total Charge:',lang)+' '+currency_symbol_object[id]+' ';totalChargeLabel.style.color='black';totalChargeLabel.style.fontWeight='600';totalChargeLabel.style.width='100%';var totalChargeDivElement=document.getElementById('whydonate-total-charge-div'+id);if(!totalChargeDivElement){totalChargeDiv.appendChild(totalChargeLabel);tipBox.appendChild(totalChargeDiv);}
-let dropDownValue=document.getElementById(`select-dropdown-${id}`).value;calculateTotalAmountDropDown(id,dropDownValue);document.getElementById(`input-tip${id}`).oninput=function(){removeNonIntegerChars(this);};}
-function removeNonIntegerChars(inputElement){inputElement.value=inputElement.value.replace(/\D/g,'');}
-function handleTipDropdownNew(id){let options=[];let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let selectedValue=getSelectedValue(id);if(selectedValue>=10){options=[{text:'15% ('+
-formatCurrency((selectedValue*0.15).toFixed(2),lang)+
-')',value:(selectedValue*0.15).toFixed(2),},{text:'5% ('+
-formatCurrency((selectedValue*0.05).toFixed(2),lang)+
-')',value:(selectedValue*0.05).toFixed(2),},{text:'10% ('+
-formatCurrency((selectedValue*0.1).toFixed(2),lang)+
-')',value:(selectedValue*0.1).toFixed(2),},{text:_e('Other',lang),value:'Amount'},];}else{options=[{text:currency_symbol_object[id]+
+var totalChargeDiv=document.createElement('div');totalChargeDiv.id='whydonate-total-charge-div'+id;totalChargeDiv.style.height='0px';totalChargeDiv.style.display='none';totalChargeDiv.style.marginTop='0px';totalChargeDiv.style.textAlign='right';var totalChargeLabel=document.createElement('label');totalChargeLabel.id='total-charge-label'+id;totalChargeLabel.style.fontFamily=font;totalChargeLabel.style.fontSize='15px';totalChargeLabel.innerHTML=_e('Total Charge:',lang)+' '+currency_symbol_object[id]+' ';totalChargeLabel.style.color='black';totalChargeLabel.style.fontWeight='600';totalChargeLabel.style.width='100%';var totalChargeDivElement=document.getElementById('whydonate-total-charge-div'+id);if(!totalChargeDivElement){totalChargeDiv.appendChild(totalChargeLabel);tipBox.appendChild(totalChargeDiv);}
+let dropDownValue=document.getElementById(`select-dropdown-${id}`).value;calculateTotalAmountDropDown(id,dropDownValue);}
+function handleTipDropdownNew(id){let options=[];let fundraiser_donation_values_response=fundraiser_donation_values_object[id];let selectedValue=getSelectedValue(id);if(selectedValue>=10){options=[{text: currency_symbol_object[id]+' '+0, value: 0,},{text:'5% ('+(selectedValue*0.05).toFixed(2)+')',value:(selectedValue*0.05).toFixed(2),},{text:'10% ('+(selectedValue*0.1).toFixed(2)+')',value:(selectedValue*0.1).toFixed(2),},{text:_e('Amount',lang),value:'Amount'},];}else{options=[{text: currency_symbol_object[id]+' '+0, value: 0,},{text:currency_symbol_object[id]+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.third_option,lang),value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.third_option,},{text:currency_symbol_object[id]+
+fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.first_option,value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.first_option,},{text:currency_symbol_object[id]+
 ' '+
-formatCurrency(fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.first_option,lang),value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.first_option,},{text:currency_symbol_object[id]+
-' '+
-formatCurrency(fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.second_option,lang),value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.second_option,},{text:_e('Other',lang),value:'Amount'},];}
+fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.second_option,value:fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.second_option,},{text:_e('Amount',lang),value:'Amount'},];}
 let dropDownValue=document.getElementById(`select-dropdown-${id}`).value;var selectElement=document.getElementById(`select-dropdown-${id}`);selectElement.innerHTML='';options.forEach(function(option){var optionElement=document.createElement('option');optionElement.text=option.text;optionElement.value=option.value;selectElement.appendChild(optionElement);});let otherRadio=document.getElementById('select-amount-other-'+id);let openRadio=document.getElementById('select-open-amount-'+id);let inputTipDivEle=document.getElementById(`input-tip-div${id}`);if(otherRadio&&otherRadio.checked&&dropDownValue=='Amount'){for(var i=0;i<selectElement.options.length;i++){if(selectElement.options[i].value==='Amount'){selectElement.options[i].selected=true;break;}}}else if(openRadio&&openRadio.checked&&dropDownValue=='Amount'){for(var i=0;i<selectElement.options.length;i++){if(selectElement.options[i].value==='Amount'){selectElement.options[i].selected=true;break;}}}else{inputTipDivEle.style.display='none';}
 var tip_box_input=document.getElementById(`input-tip${id}`);tip_box_input.value=fundraiser_donation_values_response.data.tip_amount.default_values.tip_amount_fixed_default;if(dropDownValue=='Amount'&&selectedValue>=10){calculateTotalAmountDropDown(id,selectedValue*0.15);}else if(dropDownValue=='Amount'&&selectedValue<10){calculateTotalAmountDropDown(id,fundraiser_donation_values_response.data.tip_amount.tip_amount_fixed.third_option);}else{calculateTotalAmountDropDown(id,dropDownValue);}}
 function handleTipDropdownOnChange(id,value){let inputTipDivEle=document.getElementById(`input-tip-div${id}`);if(value!='Amount'){inputTipDivEle.style.display='none';}
@@ -1011,7 +962,7 @@ var totalAmount=selectedAmount+tipAmount;var tipLabel=document.getElementById('t
 ' '+
 currency_symbol_object[slug]+
 ' '+
-formatCurrency(totalAmount,lang);var tipBox=document.getElementById('tip-box-'+slug);let tipMinMaxError=document.getElementById(`show-other-tip-error-msg-${slug}`);tipMinMaxError.style.visibility='hidden';tipMinMaxError.style.display='none';var minimumAllowed=fundraiser_donation_values_response.data.customdonationconfiguration.min_donation_amount;var maximumAllowed=fundraiser_donation_values_response.data.customdonationconfiguration.max_donation_amount;tipMinMaxError.style.visibility='hidden';tipMinMaxError.style.display='none';if(isNaN(totalAmount)||parseFloat(totalAmount)<parseFloat(minimumAllowed)||parseFloat(totalAmount)>parseFloat(maximumAllowed)){tipMinMaxError.style.visibility='visible';tipMinMaxError.style.display='block';}
+totalAmount;var tipBox=document.getElementById('tip-box-'+slug);let tipMinMaxError=document.getElementById(`show-other-tip-error-msg-${slug}`);tipMinMaxError.style.visibility='hidden';tipMinMaxError.style.display='none';var minimumAllowed=fundraiser_donation_values_response.data.customdonationconfiguration.min_donation_amount;var maximumAllowed=fundraiser_donation_values_response.data.customdonationconfiguration.max_donation_amount;tipMinMaxError.style.visibility='hidden';tipMinMaxError.style.display='none';if(isNaN(totalAmount)||parseFloat(totalAmount)<parseFloat(minimumAllowed)||parseFloat(totalAmount)>parseFloat(maximumAllowed)){tipMinMaxError.style.visibility='visible';tipMinMaxError.style.display='block';}
 if(tipBox.style.display=='none'){tipAmount=0.0;}
 return tipAmount;}
 async function otherTipAmountHandler(slug){var selectedValue=document.getElementById(`select-dropdown-${slug}`).value;let fundraiser_donation_values_response=fundraiser_donation_values_object[slug];if(selectedValue=='Amount'||selectedValue=='Bedrag'||selectedValue=='Menge'||selectedValue=='Cantidat'){var inputTipDiv=document.getElementById('input-tip-div'+slug);inputTipDiv.style.display='flex';var inputTipBox=document.getElementById('input-tip'+slug);inputTipBox.value=fundraiser_donation_values_response.data.tip_amount.default_values.tip_amount_fixed_default;var otherRadio=document.getElementById('select-amount-other-'+slug);var otherRadioText=document.getElementById('select-amount-other-text-'+slug);if(otherRadio&&otherRadio.checked){var otherAmountInputBox=document.getElementById('other-amount-number-'+slug);if(parseInt(otherAmountInputBox.value)>9){inputTipBox.value=(otherAmountInputBox.value*0.1).toFixed(2);inputTipBox.value=(Math.round(inputTipBox.value*100)/100).toFixed(2);}else{inputTipBox.value=(Math.round(inputTipBox.value*100)/100).toFixed(2);}}
@@ -1087,174 +1038,43 @@ var selectThird=document.getElementById('amount-boundary-box-3-s-'+id);if(select
 var selectForth=document.getElementById('amount-boundary-box-4-s-'+id);if(selectForth!=null){selectForth.style.backgroundColor='white';}
 var selectOther=document.getElementById('amount-boundary-box-other-s-'+id);if(selectOther!=null){selectOther.style.backgroundColor=colorCode;}
 var otherAmountDiv=document.getElementById('other-amount-div-'+id);otherAmountDiv.style.display='flex';if(tip_enabled){handleTipDropdownNew(id);}}
-function submitDonation(event, fundraising_local_id, title, id, successUrl, failureUrl, tip_enabled) {
-  event.preventDefault();
-  let fundraiser_donation_values_response = fundraiser_donation_values_object[id];
-  event.stopPropagation();
-  let currencySelect = document.getElementById(`currency-select-${id}`);
-  var redirectLink = window.location.href;
-  var periods = document.getElementsByName('period-intervals-' + id);
-  var periodsVal = '';
-  for (var i = 0, length = periods.length; i < length; i++) {
-    if (periods[i].checked) {
-      periodsVal = periods[i].value;
-      break;
-    }
-  }
-  var amount = document.getElementsByName('select-amount-' + id);
-  var amountVal = '';
-  for (var i = 0, length = amount.length; i < length; i++) {
-    if (amount[i].checked) {
-      amountVal = amount[i].value;
-      if (amountVal == 'other') {
-        amountVal = document.getElementById('other-amount-number-' + id).value;
-      }
-      break;
-    }
-  }
-  let openAmountNumberSelectEle = document.getElementById(`select-open-amount-${id}`);
-  let openAmountNumberEle = document.getElementById(`open-amount-number-${id}`);
-  if (openAmountNumberSelectEle.checked) {
-    amountVal = openAmountNumberEle.value;
-  }
-  var flocalId = fundraising_local_id;
-  var firstName = 'firstname-' + id;
-  var lastName = 'lastname-' + id;
-  var email = 'email-' + id;
-  var isAnonymous = 'is-anonymous-' + id;
-  var tipBoxDiv = 'tip-box-' + id;
-  var tipBoxEnabled = tipBoxDiv ? true : false;
-  var lang = getLang();
-  var tipAmount = 0;
-  if (tipBoxEnabled) {
-    var selectItem = document.getElementById(`select-dropdown-${id}`).value;
-    if (selectItem == 'Amount') {
-      tipAmount = parseFloat(document.getElementById(`input-tip${id}`).value);
-    } else {
-      tipAmount = parseFloat(document.getElementById(`select-dropdown-${id}`).value);
-    }
-  }
-  let flocalData = {
-    amount: amountVal,
-    bank_account: '',
-    currency_code: `${currencySelect.value}`,
-    description: title,
-    email: email,
-    first_name: firstName,
-    fundraising_local_id: flocalId,
-    is_anonymous: true,
-    lang: lang,
-    last_name: lastName,
-    newsletter: false,
-    pay_period: periodsVal,
-    return_url: redirectLink,
-    tip_amount: tipAmount,
-    tip: '0',
-    other_tip_amount: 1,
-    source: 'plugin',
-  };
-  var previewCard = document.getElementById('preview-card-' + id);
-  previewCard.style.height = '600px';
-   var firstnameError = document.getElementById('show-firstname-error-msg-' + id);
-  var lastnameError = document.getElementById('show-lastname-error-msg-' + id);
-  var emailError = document.getElementById('show-email-error-msg-' + id);
-  var otherAmountError = document.getElementById('show-other-amount-error-msg-' + id);
-  firstnameError.style.display = 'none';
-  lastnameError.style.display = 'none';
-  emailError.style.display = 'none';
-  if (otherAmountError) {
-    otherAmountError.style.display = 'none';
-  }
-  let check = true;
-  var selectOtherAmountBox = document.getElementById('select-amount-other-' + id);
-  if (selectOtherAmountBox) {
-    var selectOther = document.getElementById('select-amount-other-' + id).checked;
-  }
-
-  let minimumAllowed = parseFloat(fundraiser_donation_values_response.data.customdonationconfiguration.min_donation_amount);
-  let maximumAllowed = parseFloat(fundraiser_donation_values_response.data.customdonationconfiguration.max_donation_amount);
-  if (amountVal == '' || amountVal.includes('-') || amountVal.includes('.') || amountVal.includes(',')) {
-    check = false;
-    if (otherAmountError) {
-      otherAmountError.style.display = 'block';
-    }
-  } else {
-    if (otherAmountError) {
-      otherAmountError.style.display = 'block';
-    }
-    if (amountVal == '' || parseFloat(amountVal) < minimumAllowed) {
-      check = false;
-      if (otherAmountError) {
-        otherAmountError.style.visibility = 'visible';
-        otherAmountError.innerHTML = _e('Minimum amount', language_code) +
-          ' ' +
-          fundraiser_donation_values_response.data.symbol +
-          ' ' +
-          fundraiser_donation_values_response.data.customdonationconfiguration.min_donation_amount;
-      }
-    } else if (amountVal == '' || parseFloat(amountVal) > maximumAllowed) {
-      check = false;
-      if (otherAmountError) {
-        otherAmountError.style.visibility = 'visible';
-        otherAmountError.innerHTML = _e('Maximum amount', language_code) +
-          ' ' +
-          fundraiser_donation_values_response.data.symbol +
-          ' ' +
-          fundraiser_donation_values_response.data.customdonationconfiguration.max_donation_amount;
-      }
-    }
-  }
-  if (openAmountNumberSelectEle.checked) {
-    let openAmountValue = parseFloat(openAmountNumberEle.value);
-    if (openAmountValue == '' || openAmountValue < minimumAllowed) {
-      check = false;
-      if (otherAmountError) {
-        otherAmountError.style.visibility = 'visible';
-        otherAmountError.innerHTML = _e('Minimum amount', language_code) +
-          ' ' +
-          fundraiser_donation_values_response.data.symbol +
-          ' ' +
-          fundraiser_donation_values_response.data.customdonationconfiguration.min_donation_amount;
-      }
-    } else if (openAmountValue == '' || openAmountValue > maximumAllowed) {
-      check = false;
-      if (otherAmountError) {
-        otherAmountError.style.visibility = 'visible';
-        otherAmountError.innerHTML = _e('Maximum amount', language_code) +
-          ' ' +
-          fundraiser_donation_values_response.data.symbol +
-          ' ' +
-          fundraiser_donation_values_response.data.customdonationconfiguration.max_donation_amount;
-      }
-    }
-  }
-  if (check) {
-    var donorInfo = {
-      email: email,
-      firstname: firstName,
-      lastname: lastName,
-      is_anonymous: true,
-      language_code: lang,
-    };
-    var btn = document.getElementById(`preview-donate-btn-${id}`);
-    btn.classList.add('loading');
-    var donation_loader_text = document.getElementById(`donation-loader-text-${id}`);
-    setTimeout(function() {
-      btn.classList.remove('loading');
-      donation_loader_text.style.display = 'inline';
-    }, 8000);
-    makeDonation(flocalData, successUrl, failureUrl, donorInfo);
-  }
-}
+function submitDonation(event,fundraising_local_id,title,id,successUrl,failureUrl,tip_enabled){event.preventDefault();let fundraiser_donation_values_response=fundraiser_donation_values_object[id];event.stopPropagation();let currencySelect=document.getElementById(`currency-select-${id}`);var redirectLink=window.location.href;var periods=document.getElementsByName('period-intervals-'+id);var periodsVal='';for(var i=0,length=periods.length;i<length;i++){if(periods[i].checked){periodsVal=periods[i].value;break;}}
+var amount=document.getElementsByName('select-amount-'+id);var amountVal='';for(var i=0,length=amount.length;i<length;i++){if(amount[i].checked){amountVal=amount[i].value;if(amountVal=='other'){amountVal=document.getElementById('other-amount-number-'+id).value;}
+break;}}
+let openAmountNumberSelectEle=document.getElementById(`select-open-amount-${id}`);let openAmountNumberEle=document.getElementById(`open-amount-number-${id}`);if(openAmountNumberSelectEle.checked){amountVal=openAmountNumberEle.value;}
+var flocalId=fundraising_local_id;var firstName=document.getElementById('firstname-'+id).value;var lastName=document.getElementById('lastname-'+id).value;var email=document.getElementById('email-'+id).value;var isAnonymous=document.getElementById('is-anonymous-'+id);var tipBoxDiv=document.getElementById('tip-box-'+id);var tipBoxEnabled=tipBoxDiv?true:false;var lang=getLang();var tipAmount=0;if(tipBoxEnabled){var selectItem=document.getElementById(`select-dropdown-${id}`).value;if(selectItem=='Amount'){tipAmount=parseFloat(document.getElementById(`input-tip${id}`).value);}else{tipAmount=parseFloat(document.getElementById(`select-dropdown-${id}`).value);}}
+let flocalData={amount:amountVal,bank_account:'',currency_code:`eur`,description:title,email:email,first_name:firstName,fundraising_local_id:flocalId,is_anonymous:isAnonymous.checked?true:false,lang:lang,last_name:lastName,newsletter:false,pay_period:periodsVal,return_url:redirectLink,tip_amount:tipAmount,tip:'0',other_tip_amount:1,source:'plugin',};var previewCard=document.getElementById('preview-card-'+id);previewCard.style.height='600px';var firstnameError=document.getElementById('show-firstname-error-msg-'+id);var lastnameError=document.getElementById('show-lastname-error-msg-'+id);var emailError=document.getElementById('show-email-error-msg-'+id);var otherAmountError=document.getElementById('show-other-amount-error-msg-'+id);firstnameError.style.display='none';lastnameError.style.display='none';emailError.style.display='none';if(otherAmountError){otherAmountError.style.display='none';}
+let check=true;var selectOtherAmountBox=document.getElementById('select-amount-other-'+id);if(selectOtherAmountBox){var selectOther=document.getElementById('select-amount-other-'+id).checked;}
+if(!/\S/.test(firstName)){firstnameError.style.display='block';check=false;}
+if(!/\S/.test(lastName)){lastnameError.style.display='block';check=false;}
+if(!validateEmail(email)){emailError.style.display='block';check=false;}
+let minimumAllowed=parseFloat(fundraiser_donation_values_response.data.customdonationconfiguration.min_donation_amount);let maximumAllowed=parseFloat(fundraiser_donation_values_response.data.customdonationconfiguration.max_donation_amount);if(amountVal==''||amountVal.includes('-')||amountVal.includes('.')||amountVal.includes(',')){check=false;if(otherAmountError){otherAmountError.style.display='block';}}else{if(otherAmountError){otherAmountError.style.display='block';}
+if(amountVal==''||parseFloat(amountVal)<minimumAllowed){check=false;if(otherAmountError){otherAmountError.style.visibility='visible';otherAmountError.innerHTML=_e('Minimum amount',language_code)+
+' '+
+fundraiser_donation_values_response.data.symbol+
+' '+
+fundraiser_donation_values_response.data.customdonationconfiguration.min_donation_amount;}}else if(amountVal==''||parseFloat(amountVal)>maximumAllowed){check=false;if(otherAmountError){otherAmountError.style.visibility='visible';otherAmountError.innerHTML=_e('Maximum amount',language_code)+
+' '+
+fundraiser_donation_values_response.data.symbol+
+' '+
+fundraiser_donation_values_response.data.customdonationconfiguration.max_donation_amount;}}}
+if(openAmountNumberSelectEle.checked){let openAmountValue=parseFloat(openAmountNumberEle.value);if(openAmountValue==''||openAmountValue<minimumAllowed){check=false;if(otherAmountError){otherAmountError.style.visibility='visible';otherAmountError.innerHTML=_e('Minimum amount',language_code)+
+' '+
+fundraiser_donation_values_response.data.symbol+
+' '+
+fundraiser_donation_values_response.data.customdonationconfiguration.min_donation_amount;}}else if(openAmountValue==''||openAmountValue>maximumAllowed){check=false;if(otherAmountError){otherAmountError.style.visibility='visible';otherAmountError.innerHTML=_e('Maximum amount',language_code)+
+' '+
+fundraiser_donation_values_response.data.symbol+
+' '+
+fundraiser_donation_values_response.data.customdonationconfiguration.max_donation_amount;}}}
+if(check){var donorInfo={email:email,firstname:firstName,lastname:lastName,is_anonymous:isAnonymous.checked?true:false,language_code:lang,};var btn=document.getElementById(`preview-donate-btn-${id}`);btn.classList.add('loading');var donation_loader_text=document.getElementById(`donation-loader-text-${id}`);setTimeout(function(){btn.classList.remove('loading');donation_loader_text.style.display='inline';},8000);makeDonation(flocalData,successUrl,failureUrl,donorInfo);}}
 function getLang(){var lang=navigator.userLanguage||navigator.language||document.documentElement.lang;if(!lang){return 'en';}
 var reg_patt=new RegExp('^[a-z]{0,3}');lang=reg_patt.exec(lang).toString();if(lang.length!=2){lang='en';}
 return lang;}
 function validateEmail(email){var re=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;return re.test(String(email).toLowerCase());}
 function amountInputSpinner(value,id){const currencySymbol=currency_symbol_object[id]||'';const regex=new RegExp(`[^0-9${currencySymbol.replace(/[-\/\\^$*+?.()|[\]{}]/g,'\\$&')}]*`,'g');value=value.replace(regex,'');if(value<0){value*=-1;}
 handleOtherAmountInput(value,id);return value;}
-async function edit_preview_html_generator(options={},languageCode=''){const id=options.id||'id';let originl_html=await shortcode_func_html_generator(options,'',languageCode,'','','edit_preivew');document.getElementById(`widget-here-${id}`).remove();return originl_html;}
+async function edit_preview_html_generator(options={}){const id=options.id||'id';let originl_html=await shortcode_func_html_generator(options,'','','','','edit_preivew');document.getElementById(`widget-here-${id}`).remove();return originl_html;}
 async function wp_html_generator(options){try{const get_fundraiser_styling_response=await get_fundraiser_styling(options.shortcode);const get_fundraiser_styling_response_json=JSON.parse(get_fundraiser_styling_response);let html_result;if(get_fundraiser_styling_response_json.data.message=='Not_Avaliable'){html_result=await shortcode_func_html_generator(options);}else{html_result=await shortcode_func_html_generator(get_fundraiser_styling_response_json.data);}
 return html_result;}catch(error){}}
-document.addEventListener('DOMContentLoaded',function(){var modalDiv=document.createElement('div');modalDiv.className='modal';modalDiv.id='modal';document.body.appendChild(modalDiv);});var donationWidgetDiv=document.querySelectorAll('.widget-here');donationWidgetDiv.forEach(function(donationWidgetDiv){var shortcode=donationWidgetDiv.dataset.shortcode;var language_code=donationWidgetDiv.dataset.lang;var success_url=donationWidgetDiv.dataset.success_url;var fail_url=donationWidgetDiv.dataset.fail_url;var slug=donationWidgetDiv.dataset.slug;get_fundraiser_styling(shortcode).then(async(get_fundraiser_styling_response)=>{let get_fundraiser_styling_response_json=JSON.parse(get_fundraiser_styling_response);await shortcode_func_html_generator(get_fundraiser_styling_response_json.data,slug,language_code,success_url,fail_url);});});var donationWidgetDiv=document.querySelectorAll('.share-widget');donationWidgetDiv.forEach(async function(donationWidgetDiv){var shortcode=donationWidgetDiv.dataset.slug;var language_code=donationWidgetDiv.dataset.lang;var success_url=donationWidgetDiv.dataset.success_url;var fail_url=donationWidgetDiv.dataset.fail_url;var slug=donationWidgetDiv.dataset.slug;var cardShow=donationWidgetDiv.dataset.card;var form_mode=donationWidgetDiv.dataset.form_mode;let fundraiserInfo=await get_fundraiser_info(slug,language_code);let fundraiserInfoJson=JSON.parse(fundraiserInfo);let currencyCode=fundraiserInfoJson.data.result.currency_code;let donationAmountOptions=await fundraiser_donation_values_share_api(slug,currencyCode);let firstAmount=donationAmountOptions.data.customdonationconfiguration.onetime.default_1;let secondAmount=donationAmountOptions.data.customdonationconfiguration.onetime.default_2;let thirdAmount=donationAmountOptions.data.customdonationconfiguration.onetime.default_3;let forthAmount=donationAmountOptions.data.customdonationconfiguration.onetime.default_4;let firstAmountMonthly=donationAmountOptions.data.customdonationconfiguration.monthly.default_1;let secondAmountMonthly=donationAmountOptions.data.customdonationconfiguration.monthly.default_2;let thirdAmountMonthly=donationAmountOptions.data.customdonationconfiguration.monthly.default_3;let forthAmountMonthly=donationAmountOptions.data.customdonationconfiguration.monthly.default_4;let firstAmountYearly=donationAmountOptions.data.customdonationconfiguration.yearly.default_1;let secondAmountYearly=donationAmountOptions.data.customdonationconfiguration.yearly.default_2;let thirdAmountYearly=donationAmountOptions.data.customdonationconfiguration.yearly.default_3;let forthAmountYearly=donationAmountOptions.data.customdonationconfiguration.yearly.default_4;let primaryColor=fundraiserInfoJson.data.result.profile.primary_color;let secondaryColor=fundraiserInfoJson.data.result.profile.secondary_color;let font=fundraiserInfoJson.data.result.font;let buttonRadius=fundraiserInfoJson.data.result.button_radius;let card_shadow=fundraiserInfoJson.data.result.card_shadow;let doNotShowBox,showProgressBar,showRaisedAmount,showEndDate,showDonationFormOnly,background_allowed;if(cardShow=='show'){doNotShowBox=0;showProgressBar=2;showRaisedAmount=3;showEndDate=4;}else{doNotShowBox=1;showProgressBar=0;showRaisedAmount=0;showEndDate=0;}
-if(form_mode=='donation-form+widget'){showDonationFormOnly=1;background_allowed=0;}else if(form_mode=='donation-form'){showDonationFormOnly=0;background_allowed=0;}else if(form_mode=='show-with-image'){showDonationFormOnly=0;background_allowed=1;}else if(form_mode=='donation-form+image'){showDonationFormOnly=1;background_allowed=1;}
-let options={id:slug,shortcode:shortcode,firstAmount,secondAmount,thirdAmount,forthAmount,firstAmountMonthly,secondAmountMonthly,thirdAmountMonthly,forthAmountMonthly,firstAmountYearly,secondAmountYearly,thirdAmountYearly,forthAmountYearly,primaryColor,secondaryColor,showDonateButton:1,showProgressBar,showRaisedAmount,showEndDate,showDonationFormOnly,doNotShowBox,oneTimeCheck:1,monthlyCheck:2,yearlyCheck:3,firstAmountCheck:1,secondAmountCheck:2,thirdAmountCheck:3,forthAmountCheck:4,otherChecked:1,font,buttonRadius,card_shadow,pluginStyle:'Custom',background_allowed,};await shortcode_func_html_generator(options,slug,language_code,success_url,fail_url,'share_mode');});
+document.addEventListener('DOMContentLoaded',function(){var modalDiv=document.createElement('div');modalDiv.className='modal';modalDiv.id='modal';document.body.appendChild(modalDiv);});var donationWidgetDiv=document.querySelectorAll('.widget-here');donationWidgetDiv.forEach(function(donationWidgetDiv){var shortcode=donationWidgetDiv.dataset.shortcode;var language_code=donationWidgetDiv.dataset.lang;var success_url=donationWidgetDiv.dataset.success_url;var fail_url=donationWidgetDiv.dataset.fail_url;var slug=donationWidgetDiv.dataset.slug;get_fundraiser_styling(shortcode).then(async(get_fundraiser_styling_response)=>{let get_fundraiser_styling_response_json=JSON.parse(get_fundraiser_styling_response);await shortcode_func_html_generator(get_fundraiser_styling_response_json.data,slug,language_code,success_url,fail_url);});});
